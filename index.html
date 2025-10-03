@@ -8,42 +8,75 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
+    /* THEME: base (dark) */
     :root{
-      --bg:#0b0e18;--panel:#0e1324;--panel2:#0b112b;--ink:#eef2ff;--muted:#b6c3ff;--brand:#7aa2ff;--lime:#8ef7d0;--gold:#ffd27a;--ring:rgba(122,162,255,.35);
-      --shadow:0 12px 40px rgba(0,0,0,.45);--radius:18px
+      --bg:#0b0e18; --panel:#0e1324; --panel2:#0b112b;
+      --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
+      --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45); --radius:18px;
+      --border:rgba(255,255,255,.10); --field:#0f1734; --pill:#0e1531;
     }
+    /* THEME: light */
+    :root[data-theme='light']{
+      --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
+      --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
+      --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
+      --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+    }
+    /* Follow system default when no manual theme selected */
+    @media (prefers-color-scheme: light){
+      :root:not([data-theme="dark"]){
+        --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
+        --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
+        --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
+        --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+      }
+    }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 10% -10%, #172044 0%, transparent 60%),radial-gradient(900px 600px at 90% 10%, #111b3c 0%, transparent 50%),var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    html,body{
+      margin:0; padding:0;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #172044 0%, transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, #111b3c 0%, transparent 50%),
+        var(--bg);
+      color:var(--ink);
+      font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+    }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
     /* Layout */
     .layout{display:grid;grid-template-columns:320px 1fr;gap:24px;max-width:1200px;margin:0 auto;padding:24px}
     @media (max-width:1024px){.layout{grid-template-columns:1fr}}
-    .sidebar{position:sticky;top:18px;height:calc(100dvh - 36px);display:grid;grid-template-rows:auto 1fr auto;gap:16px;background:linear-gradient(180deg,#111737,#0c1229);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:20px;box-shadow:var(--shadow)}
+    .sidebar{
+      position:sticky; top:18px; height:calc(100dvh - 36px);
+      display:grid; grid-template-rows:auto 1fr auto; gap:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border); border-radius:24px; padding:20px; box-shadow:var(--shadow)
+    }
     @media (max-width:1024px){.sidebar{position:static;height:auto}}
     .brandcard{display:grid;gap:10px}
     .avatar{width:92px;height:92px;border-radius:20px;background:linear-gradient(135deg,#1e2a66,#10204a);display:grid;place-items:center;border:1px solid rgba(255,255,255,.12)}
     .avatar svg{width:60px;height:60px}
     .name{font-family:Space Grotesk,Inter,sans-serif;font-weight:700;font-size:28px}
     .title{color:var(--muted);font-size:14px}
-    .button{display:inline-flex;align-items:center;gap:8px;background:#0f1734;border:1px solid rgba(255,255,255,.1);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
+    .button{display:inline-flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--border);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
     .button:hover{box-shadow:0 0 0 3px var(--ring)}
     .linklist{display:grid;gap:8px}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#0e1531;color:var(--muted);font-size:12px;border:1px solid rgba(255,255,255,.06)}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--pill);color:var(--muted);font-size:12px;border:1px solid var(--border)}
 
     .main{display:grid;gap:24px}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
     h2{margin:0 0 12px;font-size:22px}
     .about{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
     @media (max-width:900px){.about{grid-template-columns:1fr}}
 
-    /* KPI grid responsive */
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     @media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
     @media (max-width:540px){.kpis{grid-template-columns:1fr}}
-    .kpi{background:#0c142e;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;display:grid;gap:6px}
+    .kpi{background:#0c142e;border:1px solid var(--border);border-radius:16px;padding:14px;display:grid;gap:6px}
     .kpi .label{font-size:12px;color:var(--muted)}
     .kpi .value{font-size:26px;font-weight:800}
 
@@ -54,17 +87,26 @@
     @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
     @media (max-width:600px){.grid-3{grid-template-columns:1fr}}
 
-    .tile{background:linear-gradient(180deg,#121b36,#0c1224);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;display:grid;gap:8px}
+    .tile{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:16px;padding:14px;display:grid;gap:8px}
     .tile h3{margin:0;font-size:16px}
     .row{display:flex;gap:8px;flex-wrap:wrap}
 
     .tabs{display:flex;gap:8px;flex-wrap:wrap}
-    .tab{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#0f1734;cursor:pointer;font-size:14px}
+    .tab{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--field);cursor:pointer;font-size:14px}
     .tab.active{background:#162349}
     .footer{color:var(--muted);font-size:14px;padding:20px 0}
     .quote{font-style:italic;color:#d8deff;font-size:14px;border-left:3px solid var(--brand);padding-left:10px}
     .as-seen{display:flex;gap:10px;flex-wrap:wrap}
     .badge{font-size:11px;color:#0b1020;background:linear-gradient(90deg,var(--brand),var(--lime));border-radius:8px;padding:4px 8px;font-weight:700}
+
+    /* Search input */
+    .search{
+      width:100%; padding:12px 14px; margin-top:10px;
+      border-radius:12px; border:1px solid var(--border);
+      background:var(--field); color:var(--ink); outline:none; font-size:14px;
+    }
+    .search::placeholder{ color:var(--muted); opacity:.85 }
+    .search:focus{ box-shadow:0 0 0 3px var(--ring); border-color:transparent }
 
     /* Mobile helpers */
     @media (max-width:480px){
@@ -91,6 +133,9 @@
   -->
 </head>
 <body>
+  <!-- build marker: update this comment each commit to spot new deploys -->
+  <!-- build: 2025-10-03 -->
+
   <div class="layout">
     <aside class="sidebar">
       <div class="brandcard">
@@ -98,12 +143,14 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#8ef7d0" stroke-width="1.2"><path d="M12 12a5 5 0 100-10 5 5 0 000 10z"/><path d="M3 22a9 9 0 0118 0"/></svg>
         </div>
         <div class="name">Omar Sandoval</div>
-        <div class="title">CTO / CIO • AI, Cloud, Security, Data • Chicago area. Open to remote and hybrid.</div>
+        <div class="title">CTO / CIO • AI, Cloud, Security, Data • Chicago area, open to remote</div>
         <div class="row">
           <a class="button" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="button" href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
+          <button class="button" id="themeToggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
       </div>
+
       <div>
         <div class="pill">As seen in</div>
         <div class="as-seen" style="margin-top:8px">
@@ -112,6 +159,7 @@
           <span class="pill">Innovation x2</span>
         </div>
       </div>
+
       <div class="linklist">
         <a class="button" href="#work">Projects</a>
         <a class="button" href="#files">Work Samples</a>
@@ -124,20 +172,24 @@
     <main class="main">
       <section class="card about">
         <div>
-          <div class="section-head"><h2>About</h2><span class="muted">Updated 2025-10-03</span></div>
-          <p>I turn ideas into shipped systems and scale them with reliability and security. Recent work includes Connect66 traction, multi site infrastructure across 18 facilities and 1,000 plus devices, and teaching CWNA. I care about clear goals, simple rules, and steady coaching.</p>
+          <div class="section-head"><h2>About</h2><span class="muted">Updated <span id="updated"></span></span></div>
+          <p>I turn ideas into shipped systems and scale them with reliability and security. Recent work includes Connect66 traction, multi-site infrastructure across 18 facilities and 1,000+ devices, and teaching CWNA. I care about clear goals, simple rules, and steady coaching.</p>
           <p class="quote">“Rare mix: exec who ships product, runs ops, and builds in public.”</p>
           <div class="row"><a class="button" href="#files">Work Samples</a><a class="button" href="#work">Projects</a></div>
         </div>
         <div class="kpis">
           <div class="kpi"><div class="label">Recent</div><div class="value">15k+</div><div class="muted">Organic touches in three weeks</div></div>
-          <div class="kpi"><div class="label">Scale</div><div class="value">18 sites</div><div class="muted">Network and access control</div></div>
+          <div class="kpi"><div class="label">Scale</div><div class="value">18 sites</div><div class="muted">Network & access control</div></div>
           <div class="kpi"><div class="label">Delivery</div><div class="value">30%</div><div class="muted">Cycle time reduction</div></div>
         </div>
       </section>
 
       <section id="work" class="card">
-        <div class="section-head"><h2>Projects</h2><div class="tabs" id="tagbar"></div></div>
+        <div class="section-head">
+          <h2>Projects</h2>
+          <div class="tabs" id="tagbar"></div>
+        </div>
+        <div style="height:6px"></div>
         <input class="search" id="q" placeholder="Search projects by name or tag" />
         <div class="grid-3" id="projectList" style="margin-top:12px"></div>
       </section>
@@ -168,23 +220,35 @@
   </div>
 
   <script>
-    // Year stamp
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ----- Theme toggle (remembers user choice) -----
+    (function(){
+      const ROOT = document.documentElement, KEY = 'omar-theme';
+      const btn = document.getElementById('themeToggle');
+      function apply(theme){ theme ? ROOT.setAttribute('data-theme', theme) : ROOT.removeAttribute('data-theme'); }
+      function label(){ btn.textContent = ROOT.getAttribute('data-theme')==='light' ? '🌙 Dark' : '☀️ Light'; }
+      const saved = localStorage.getItem(KEY); if(saved){ apply(saved); }
+      label();
+      btn?.addEventListener('click', () => { const now = ROOT.getAttribute('data-theme')==='light' ? 'dark' : 'light'; apply(now); localStorage.setItem(KEY, now); label(); });
+    })();
 
-    // Protect email from scrapers — change to your real address username/domain
-    const user = 'omar'; const dom = 'sandoval'; const tld = 'com';
-    const addr = `${user}${'.'}${dom}@gmail.${tld}`;
+    // ----- General init -----
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('updated').textContent = new Date().toLocaleDateString();
+
+    // ---- Email (swap to your real addr below) ----
+    const user='omar', dom='sandoval', tld='com';
+    const addr = `${user}.${dom}@gmail.${tld}`;
     const ml = document.getElementById('mailto'); ml.textContent = addr; ml.href = `mailto:${addr}`;
 
-    // Projects data
+    // ----- DATA: Projects (edit me) -----
     const PROJECTS=[
-      {name:'Connect66 Platform',summary:'AI assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'#'}]},
+      {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'#'}]},
       {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'Overview',href:'#'}]},
       {name:'Multi Site Infrastructure',summary:'Standardized networks and access control across 18 facilities.',tools:['Networking','Security','Ops'],links:[{label:'Case Study',href:'#'}]},
       {name:'Loopz MVP',summary:'Family logistics MVP for scheduling and reminders.',tools:['React','API','Mobile'],links:[{label:'Demo',href:'#'}]},
     ];
 
-    // Files data (replace with your links in /files)
+    // ----- DATA: Files (put PDFs in /files and update hrefs) -----
     const FILES=[
       {title:'Engineering Team Leadership and Delivery',kind:'PDF',tools:['Leadership','Delivery'],href:'/files/omar_sandoval_engineering_leadership.pdf'},
       {title:'Connect66 Launch Case Study',kind:'PDF',tools:['AI','Content','Analytics'],href:'/files/omar_sandoval_connect66_case.pdf'},
@@ -195,16 +259,16 @@
       {title:'References',kind:'PDF',tools:['References'],href:'/files/omar_sandoval_references.pdf'},
     ];
 
-    // Awards data
+    // ----- DATA: Awards (link to sources) -----
     const AWARDS=[
       {title:'OnCon Icon Top 50 Technology Professional (2025)',org:'OnConferences',tag:'Top 50',href:'https://www.onconferences.com/25-tech-winners'},
       {title:'GovTech Top 25 Doers, Dreamers & Drivers (2020)',org:'Government Technology',tag:'Top 25',href:'https://www.govtech.com/top-25/Omar-Sandoval.html'},
       {title:'Special Districts Technology Innovation Awards (2019)',org:'Special Districts Program',tag:'Innovation x2',href:'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516'}
     ];
 
-    // Speaking & Programs (GovTech back to 2022 + IPRA, GFOA, GMIS) — GMIS set to Speaker per your request
+    // ----- DATA: Speaking (GovTech back to 2022 + IPRA, GFOA, GMIS) -----
     const SPEAKING = [
-      // GovTech since 2022
+      // GovTech (since 2022)
       { title: "Illinois Digital Government Summit", role: "Moderator", year: "2022",
         note: "Security posture session", href: "https://events.govtech.com/Illinois-Digital-Government-Summit-2022" },
       { title: "Chicago Digital Government Summit", role: "Speaker", year: "2022",
@@ -232,46 +296,59 @@
       { title: "GFOA – General Session", role: "Featured Speaker", year: "2022",
         note: "General session page", href: "https://www.gfoa.org/sessions/119th-annual-conference-sessions/general-session--monday-keynote" },
 
-      // GMIS
+      // GMIS (set as Speaker per your direction; swap hrefs to exact agendas as you find them)
       { title: "GMIS Illinois – GIANTS Conference", role: "Speaker", year: "2016",
-        note: "Conference program / directory", href: "https://2016giantsgmisillinois.sched.com/directory/attendees" },
+        note: "Conference directory", href: "https://2016giantsgmisillinois.sched.com/directory/attendees" },
       { title: "GMIS Illinois – GIANTS Conference", role: "Speaker", year: "2025",
         note: "Conference sessions and program presence", href: "https://www.linkedin.com/posts/waseem-khan-254b8217b_great-first-day-of-the-gmis-illinois-giants-activity-7317404050524721153-sY-s" },
       { title: "GMIS International Annual Conference", role: "Speaker", year: "Various",
         note: "National conference appearances", href: "https://gmis.org/" }
     ];
 
-    // Render projects
-    const list=document.getElementById('projectList'); const tagbar=document.getElementById('tagbar'); const q=document.getElementById('q');
+    // ----- RENDERERS -----
+    const list=document.getElementById('projectList'), tagbar=document.getElementById('tagbar'), q=document.getElementById('q');
     const state={tag:'All',q:''};
     const uniq=arr=>['All',...Array.from(new Set(arr.flatMap(p=>p.tools)))];
     const projCard=p=>`<div class="tile"><h3>${p.name}</h3><p>${p.summary}</p><div class="row">${p.tools.map(t=>`<span class='pill'>${t}</span>`).join(' ')}</div><div class="row">${(p.links||[]).map(l=>`<a class='button' href='${l.href}' target='_blank' rel='noopener'>${l.label}</a>`).join(' ')}</div></div>`;
     function renderProjects(){
       const term=state.q.toLowerCase();
-      const data=PROJECTS.filter(p=>{const tagOk=state.tag==='All'||p.tools.includes(state.tag); const text=(p.name+' '+p.summary+' '+p.tools.join(' ')).toLowerCase(); const qOk=!term||text.includes(term); return tagOk&&qOk});
+      const data=PROJECTS.filter(p=>{
+        const tagOk=state.tag==='All'||p.tools.includes(state.tag);
+        const text=(p.name+' '+p.summary+' '+p.tools.join(' ')).toLowerCase();
+        const qOk=!term||text.includes(term);
+        return tagOk&&qOk
+      });
       list.innerHTML=data.map(projCard).join('');
     }
     function renderTags(){
-      tagbar.innerHTML=''; uniq(PROJECTS).forEach(t=>{const el=document.createElement('button'); el.className='tab'+(t===state.tag?' active':''); el.textContent=t; el.onclick=()=>{state.tag=t; renderTags(); renderProjects();}; tagbar.appendChild(el);});
+      tagbar.innerHTML='';
+      uniq(PROJECTS).forEach(t=>{
+        const el=document.createElement('button');
+        el.className='tab'+(t===state.tag?' active':'');
+        el.textContent=t;
+        el.onclick=()=>{state.tag=t; renderTags(); renderProjects();};
+        tagbar.appendChild(el);
+      });
     }
-    if(q){ q.addEventListener('input',e=>{state.q=e.target.value; renderProjects();}); }
+    q?.addEventListener('input',e=>{state.q=e.target.value; renderProjects();});
     renderTags(); renderProjects();
 
-    // Render files
+    // Files render
     const gal=document.getElementById('fileGallery');
     gal.innerHTML=FILES.map(f=>`<div class='tile'><h3>${f.title} <span class='badge'>${f.kind}</span></h3><div class='muted'>${f.tools.join(', ')}</div><div class='row'><a class='button' href='${f.href}' target='_blank' rel='noopener' data-track='file:${f.title}'>Open</a></div></div>`).join('');
 
-    // Render awards
+    // Awards render
     const awardsGal=document.getElementById('awardsGallery');
     awardsGal.innerHTML=AWARDS.map(a=>`<div class='tile'><h3>${a.title} <span class='badge'>${a.tag}</span></h3><div class='muted'>${a.org}</div><div class='row'><a class='button' href='${a.href}' target='_blank' rel='noopener'>View</a></div></div>`).join('');
 
-    // Render speaking
+    // Speaking render
     const speakingList=document.getElementById('speakingList');
     speakingList.innerHTML=SPEAKING.map(s=>`<div class='tile'><h3>${s.title} <span class='badge'>${s.role}</span></h3><div class='muted'>${s.year} • ${s.note}</div><div class='row'><a class='button' href='${s.href}' target='_blank' rel='noopener'>View</a></div></div>`).join('');
 
-    // Analytics event for file clicks (works with GA4 or Plausible if enabled)
+    // Track file clicks (GA4 or Plausible if enabled)
     document.body.addEventListener('click',e=>{
-      const a=e.target.closest('a[data-track]'); if(!a) return; const label=a.getAttribute('data-track');
+      const a=e.target.closest('a[data-track]'); if(!a) return;
+      const label=a.getAttribute('data-track');
       if(window.gtag){ gtag('event','click', { event_category:'file', event_label: label }); }
       if(window.plausible){ plausible('File Open', { props: { label } }); }
     });
