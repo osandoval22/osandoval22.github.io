@@ -16,6 +16,13 @@
       --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
       --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45); --radius:18px;
       --border:rgba(255,255,255,.10); --field:#0f1734; --pill:#0e1531;
+
+      /* NEW: KPI + chip variables (dark defaults) */
+      --kpi-bg:#0c142e;          /* KPI card background */
+      --kpi-ink:#eef2ff;         /* KPI number color */
+      --kpi-muted:#b6c3ff;       /* KPI label/body color */
+      --chip-active:#162349;     /* active tag bg */
+      --chip-ink:#eef2ff;        /* active tag text */
     }
     /* THEME: light */
     :root[data-theme='light']{
@@ -23,14 +30,24 @@
       --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
       --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
       --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+
+      /* Light overrides for KPI + chips */
+      --kpi-bg:#f0f4ff;
+      --kpi-ink:#0a1028;
+      --kpi-muted:#51618f;
+      --chip-active:#dfe7ff;
+      --chip-ink:#0a1028;
     }
-    /* Follow system default when no manual theme selected */
+    /* Follow system setting when no manual choice is saved */
     @media (prefers-color-scheme: light){
       :root:not([data-theme="dark"]){
         --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
         --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
         --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
         --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+
+        --kpi-bg:#f0f4ff; --kpi-ink:#0a1028; --kpi-muted:#51618f;
+        --chip-active:#dfe7ff; --chip-ink:#0a1028;
       }
     }
 
@@ -76,9 +93,18 @@
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     @media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
     @media (max-width:540px){.kpis{grid-template-columns:1fr}}
-    .kpi{background:#0c142e;border:1px solid var(--border);border-radius:16px;padding:14px;display:grid;gap:6px}
-    .kpi .label{font-size:12px;color:var(--muted)}
-    .kpi .value{font-size:26px;font-weight:800}
+
+    /* KPI tiles use new theme vars */
+    .kpi{
+      background:var(--kpi-bg);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      display:grid;
+      gap:6px;
+    }
+    .kpi .label{font-size:12px;color:var(--kpi-muted)}
+    .kpi .value{font-size:30px;font-weight:800;letter-spacing:.2px;color:var(--kpi-ink)}
 
     .section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}
     .muted{color:var(--muted);font-size:13px}
@@ -93,9 +119,15 @@
 
     .tabs{display:flex;gap:8px;flex-wrap:wrap}
     .tab{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--field);cursor:pointer;font-size:14px}
-    .tab.active{background:#162349}
+    .tab.active{
+      background:var(--chip-active);
+      color:var(--chip-ink);
+      border-color:transparent;
+      box-shadow:0 0 0 2px var(--ring);
+    }
+
     .footer{color:var(--muted);font-size:14px;padding:20px 0}
-    .quote{font-style:italic;color:#d8deff;font-size:14px;border-left:3px solid var(--brand);padding-left:10px}
+    .quote{font-style:italic;color:#6a78a8;font-size:14px;border-left:3px solid var(--brand);padding-left:10px}
     .as-seen{display:flex;gap:10px;flex-wrap:wrap}
     .badge{font-size:11px;color:#0b1020;background:linear-gradient(90deg,var(--brand),var(--lime));border-radius:8px;padding:4px 8px;font-weight:700}
 
@@ -134,7 +166,7 @@
 </head>
 <body>
   <!-- build marker: update this comment each commit to spot new deploys -->
-  <!-- build: 2025-10-03 -->
+  <!-- build: 2025-10-03 fix-kpi -->
 
   <div class="layout">
     <aside class="sidebar">
@@ -220,7 +252,7 @@
   </div>
 
   <script>
-    // ----- Theme toggle (remembers user choice) -----
+    // ----- Theme toggle -----
     (function(){
       const ROOT = document.documentElement, KEY = 'omar-theme';
       const btn = document.getElementById('themeToggle');
@@ -240,7 +272,7 @@
     const addr = `${user}.${dom}@gmail.${tld}`;
     const ml = document.getElementById('mailto'); ml.textContent = addr; ml.href = `mailto:${addr}`;
 
-    // ----- DATA: Projects (edit me) -----
+    // ----- DATA: Projects -----
     const PROJECTS=[
       {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'#'}]},
       {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'Overview',href:'#'}]},
@@ -248,7 +280,7 @@
       {name:'Loopz MVP',summary:'Family logistics MVP for scheduling and reminders.',tools:['React','API','Mobile'],links:[{label:'Demo',href:'#'}]},
     ];
 
-    // ----- DATA: Files (put PDFs in /files and update hrefs) -----
+    // ----- DATA: Files -----
     const FILES=[
       {title:'Engineering Team Leadership and Delivery',kind:'PDF',tools:['Leadership','Delivery'],href:'/files/omar_sandoval_engineering_leadership.pdf'},
       {title:'Connect66 Launch Case Study',kind:'PDF',tools:['AI','Content','Analytics'],href:'/files/omar_sandoval_connect66_case.pdf'},
@@ -259,16 +291,15 @@
       {title:'References',kind:'PDF',tools:['References'],href:'/files/omar_sandoval_references.pdf'},
     ];
 
-    // ----- DATA: Awards (link to sources) -----
+    // ----- DATA: Awards -----
     const AWARDS=[
       {title:'OnCon Icon Top 50 Technology Professional (2025)',org:'OnConferences',tag:'Top 50',href:'https://www.onconferences.com/25-tech-winners'},
       {title:'GovTech Top 25 Doers, Dreamers & Drivers (2020)',org:'Government Technology',tag:'Top 25',href:'https://www.govtech.com/top-25/Omar-Sandoval.html'},
       {title:'Special Districts Technology Innovation Awards (2019)',org:'Special Districts Program',tag:'Innovation x2',href:'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516'}
     ];
 
-    // ----- DATA: Speaking (GovTech back to 2022 + IPRA, GFOA, GMIS) -----
+    // ----- DATA: Speaking -----
     const SPEAKING = [
-      // GovTech (since 2022)
       { title: "Illinois Digital Government Summit", role: "Moderator", year: "2022",
         note: "Security posture session", href: "https://events.govtech.com/Illinois-Digital-Government-Summit-2022" },
       { title: "Chicago Digital Government Summit", role: "Speaker", year: "2022",
@@ -284,74 +315,4 @@
       { title: "Chicago Regional Digital Government Summit", role: "Moderator", year: "2025",
         note: "Regional leadership panel", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit" },
       { title: "Illinois Public Sector Cybersecurity Summit", role: "Speaker/Moderator", year: "2025",
-        note: "Event listing (bio section)", href: "https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit.html" },
-
-      // IPRA
-      { title: "IPRA Soaring to New Heights Conference", role: "Speaker", year: "2017",
-        note: "Park District Mobile App (Finance/IT track)", href: "https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf" },
-
-      // GFOA
-      { title: "GFOA Annual Conference", role: "Speaker", year: "2022",
-        note: "Annual program listing", href: "https://gfoa-craftcms.files.svdcdn.com/production/general/GFOA-2022-Conference-Program.pdf.pdf" },
-      { title: "GFOA – General Session", role: "Featured Speaker", year: "2022",
-        note: "General session page", href: "https://www.gfoa.org/sessions/119th-annual-conference-sessions/general-session--monday-keynote" },
-
-      // GMIS (set as Speaker per your direction; swap hrefs to exact agendas as you find them)
-      { title: "GMIS Illinois – GIANTS Conference", role: "Speaker", year: "2016",
-        note: "Conference directory", href: "https://2016giantsgmisillinois.sched.com/directory/attendees" },
-      { title: "GMIS Illinois – GIANTS Conference", role: "Speaker", year: "2025",
-        note: "Conference sessions and program presence", href: "https://www.linkedin.com/posts/waseem-khan-254b8217b_great-first-day-of-the-gmis-illinois-giants-activity-7317404050524721153-sY-s" },
-      { title: "GMIS International Annual Conference", role: "Speaker", year: "Various",
-        note: "National conference appearances", href: "https://gmis.org/" }
-    ];
-
-    // ----- RENDERERS -----
-    const list=document.getElementById('projectList'), tagbar=document.getElementById('tagbar'), q=document.getElementById('q');
-    const state={tag:'All',q:''};
-    const uniq=arr=>['All',...Array.from(new Set(arr.flatMap(p=>p.tools)))];
-    const projCard=p=>`<div class="tile"><h3>${p.name}</h3><p>${p.summary}</p><div class="row">${p.tools.map(t=>`<span class='pill'>${t}</span>`).join(' ')}</div><div class="row">${(p.links||[]).map(l=>`<a class='button' href='${l.href}' target='_blank' rel='noopener'>${l.label}</a>`).join(' ')}</div></div>`;
-    function renderProjects(){
-      const term=state.q.toLowerCase();
-      const data=PROJECTS.filter(p=>{
-        const tagOk=state.tag==='All'||p.tools.includes(state.tag);
-        const text=(p.name+' '+p.summary+' '+p.tools.join(' ')).toLowerCase();
-        const qOk=!term||text.includes(term);
-        return tagOk&&qOk
-      });
-      list.innerHTML=data.map(projCard).join('');
-    }
-    function renderTags(){
-      tagbar.innerHTML='';
-      uniq(PROJECTS).forEach(t=>{
-        const el=document.createElement('button');
-        el.className='tab'+(t===state.tag?' active':'');
-        el.textContent=t;
-        el.onclick=()=>{state.tag=t; renderTags(); renderProjects();};
-        tagbar.appendChild(el);
-      });
-    }
-    q?.addEventListener('input',e=>{state.q=e.target.value; renderProjects();});
-    renderTags(); renderProjects();
-
-    // Files render
-    const gal=document.getElementById('fileGallery');
-    gal.innerHTML=FILES.map(f=>`<div class='tile'><h3>${f.title} <span class='badge'>${f.kind}</span></h3><div class='muted'>${f.tools.join(', ')}</div><div class='row'><a class='button' href='${f.href}' target='_blank' rel='noopener' data-track='file:${f.title}'>Open</a></div></div>`).join('');
-
-    // Awards render
-    const awardsGal=document.getElementById('awardsGallery');
-    awardsGal.innerHTML=AWARDS.map(a=>`<div class='tile'><h3>${a.title} <span class='badge'>${a.tag}</span></h3><div class='muted'>${a.org}</div><div class='row'><a class='button' href='${a.href}' target='_blank' rel='noopener'>View</a></div></div>`).join('');
-
-    // Speaking render
-    const speakingList=document.getElementById('speakingList');
-    speakingList.innerHTML=SPEAKING.map(s=>`<div class='tile'><h3>${s.title} <span class='badge'>${s.role}</span></h3><div class='muted'>${s.year} • ${s.note}</div><div class='row'><a class='button' href='${s.href}' target='_blank' rel='noopener'>View</a></div></div>`).join('');
-
-    // Track file clicks (GA4 or Plausible if enabled)
-    document.body.addEventListener('click',e=>{
-      const a=e.target.closest('a[data-track]'); if(!a) return;
-      const label=a.getAttribute('data-track');
-      if(window.gtag){ gtag('event','click', { event_category:'file', event_label: label }); }
-      if(window.plausible){ plausible('File Open', { props: { label } }); }
-    });
-  </script>
-</body>
-</html>
+        note: "Event
