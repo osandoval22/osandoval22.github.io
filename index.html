@@ -3,43 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Omar Sandoval • Technology Executive Portfolio</title>
-  <meta name="description" content="CTO and CIO caliber builder and operator. AI, cloud, security, data. Portfolio of projects, work samples, and contact links." />
+  <title>Omar Sandoval • Portfolio</title>
+  <meta name="description" content="CTO and CIO. Builder and operator. AI, cloud, security, data. Portfolio, projects, and work samples." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b1020;
-      --card: #121933;
-      --ink: #e9eefc;
-      --muted: #b6c3ff;
-      --brand: #6aa6ff;
-      --brand2: #8ef7d0;
-      --ring: rgba(138, 180, 255, 0.4);
+      --bg: #0b0f1a;
+      --panel: #0f1629;
+      --card: rgba(19, 26, 45, 0.7);
+      --ink: #eef2ff;
+      --muted: #b8c2ff;
+      --brand: #7aa2ff;
+      --brand2: #80f0d5;
+      --accent: #c7a6ff;
+      --ring: rgba(122, 162, 255, 0.35);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
     }
     * { box-sizing: border-box }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif }
+    html, body { margin: 0; padding: 0; background: radial-gradient(1200px 600px at 15% -10%, #151d36 0%, transparent 60%), radial-gradient(900px 600px at 90% 10%, #0f1b3a 0%, transparent 50%), var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif }
     a { color: var(--brand); text-decoration: none }
     a:hover { text-decoration: underline }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px }
-    header {
-      display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 8px 0 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px }
+    .nav {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(120%) blur(10px);
+      background: rgba(11, 15, 26, 0.6); border-bottom: 1px solid rgba(255,255,255,0.08);
     }
+    .nav-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 12px 24px; max-width: 1120px; margin: 0 auto }
     .name { font-weight: 800; font-size: clamp(22px, 4vw, 32px) }
     .tag { color: var(--muted); font-size: 14px }
-    nav { display: flex; gap: 12px; flex-wrap: wrap }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px;
-      background: linear-gradient(180deg, #1b2551, #121933); border: 1px solid rgba(255,255,255,0.08);
-      text-decoration: none; color: var(--ink); font-weight: 600;
-    }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: linear-gradient(180deg, #162349, #0f1629); border: 1px solid rgba(255,255,255,0.1); color: var(--ink); font-weight: 600 }
     .btn:hover { box-shadow: 0 0 0 3px var(--ring) }
-    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; padding: 28px 0 }
-    .card { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px }
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: stretch; padding: 28px 0 }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow) }
     h2 { margin: 0 0 10px; font-size: 20px }
     .grid { display: grid; gap: 16px }
     .grid.cols-3 { grid-template-columns: repeat(3, 1fr) }
     .grid.cols-2 { grid-template-columns: repeat(2, 1fr) }
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr }
       .grid.cols-3 { grid-template-columns: 1fr }
       .grid.cols-2 { grid-template-columns: 1fr }
@@ -50,42 +53,50 @@
     .proj { display: grid; gap: 10px }
     .proj h3 { margin: 0; font-size: 18px }
     .row { display: flex; gap: 8px; flex-wrap: wrap }
-    .tools { color: var(--muted); font-size: 12px }
+    .note { color: var(--muted); font-size: 13px }
     .footer { color: var(--muted); font-size: 14px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 24px }
     .badge { font-size: 11px; color: #0b1020; background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 8px; padding: 4px 8px; font-weight: 700 }
-    .note { color: var(--muted); font-size: 13px }
+    .linkrow a { margin-right: 12px }
+    .docbtn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 10px; background: #0f1731; border: 1px solid rgba(255,255,255,0.08); font-size: 14px }
+    .section-title { display: flex; align-items: center; justify-content: space-between; gap: 10px }
+    .section-title .right { font-size: 13px; color: var(--muted) }
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px }
+    .tile { background: linear-gradient(180deg, #121b36, #0c1224); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px; display: grid; gap: 8px }
+    .tile h3 { margin: 0; font-size: 16px }
+    .tile .tools { color: var(--muted); font-size: 12px }
+    .tile .actions a { font-size: 14px; margin-right: 10px }
     .search { width: 100%; background: #0e1531; color: var(--ink); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 12px; outline: none }
     .search:focus { box-shadow: 0 0 0 3px var(--ring) }
     .filterbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 0 }
     .chip { padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); color: var(--ink); font-size: 12px; cursor: pointer; user-select: none }
-    .chip.active { background: #1b2551 }
-    .linkrow a { margin-right: 12px }
-    .docbtn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 10px; background: #101733; border: 1px solid rgba(255,255,255,0.08); font-size: 14px }
+    .chip.active { background: #162349 }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <div class="nav">
+    <div class="nav-inner">
       <div>
         <div class="name">Omar Sandoval</div>
         <div class="tag">CTO and CIO. Builder and operator. AI, cloud, security, data. Chicago area, open to remote.</div>
       </div>
-      <nav>
+      <div class="row">
         <a class="btn" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="#work-samples">Work Samples</a>
-        <a class="btn" href="#projects">Projects</a>
+        <a class="btn" href="#work">Work</a>
+        <a class="btn" href="#files">Files</a>
         <a class="btn" href="#contact">Contact</a>
-      </nav>
-    </header>
+      </div>
+    </div>
+  </div>
 
+  <div class="wrap">
     <section class="hero">
       <div class="card">
-        <h2>About</h2>
+        <div class="section-title"><h2>About</h2><span class="right">Updated <span id="updated"></span></span></div>
         <p>I turn ideas into shipped systems and scale them with reliability and security. Recent work includes Connect66 traction, multi site infrastructure across 18 facilities and 1,000 plus devices, and teaching CWNA. I care about clear goals, simple rules, and steady coaching.</p>
         <div class="row linkrow">
-          <a class="docbtn" href="#resume">View Resume</a>
-          <a class="docbtn" href="#work-samples">Work Samples</a>
+          <a class="docbtn" href="#files">Work Samples</a>
+          <a class="docbtn" href="#work">Projects</a>
           <a class="docbtn" href="#contact">Get in touch</a>
         </div>
       </div>
@@ -93,17 +104,17 @@
         <div class="card kpi">
           <span class="pill">Recent</span>
           <b>15k plus</b>
-          <span class="note">Organic touches in three weeks on Connect66 launch</span>
+          <span class="note">Organic touches in three weeks on Connect66</span>
         </div>
         <div class="card kpi">
           <span class="pill">Scale</span>
           <b>18 sites</b>
-          <span class="note">Network and access control across facilities and devices</span>
+          <span class="note">Network and access control across facilities</span>
         </div>
         <div class="card kpi">
           <span class="pill">Delivery</span>
           <b>30 percent</b>
-          <span class="note">Cycle time reduction with simple standards and reviews</span>
+          <span class="note">Cycle time reduction with simple standards</span>
         </div>
         <div class="card kpi">
           <span class="pill">Teaching</span>
@@ -113,69 +124,19 @@
       </div>
     </section>
 
-    <section id="work-samples" class="grid cols-3">
-      <div class="card">
-        <h2>Work Samples</h2>
-        <p class="note">These are examples. Replace links with your public copies or Google Drive share links set to view only.</p>
-        <div class="proj">
-          <h3>Engineering Team Leadership and Delivery <span class="badge">PDF</span></h3>
-          <p>How I run teams for steady delivery, reliability, and cost control. Includes KPIs and rituals.</p>
-          <div class="row">
-            <a href="#" onclick="alert('Replace with your PDF link')">Open</a>
-            <a href="#" onclick="alert('Replace with your PDF link')">Download</a>
-          </div>
-        </div>
-        <div class="proj">
-          <h3>Connect66 Launch Case Study <span class="badge">PDF</span></h3>
-          <p>Zero to traction with AI assisted content and clean analytics. 15k plus organic touches in three weeks.</p>
-          <div class="row">
-            <a href="#" onclick="alert('Replace with your PDF link')">Open</a>
-            <a href="#" onclick="alert('Replace with your PDF link')">Download</a>
-          </div>
-        </div>
-        <div class="proj">
-          <h3>Multi Site Infrastructure Case Study <span class="badge">PDF</span></h3>
-          <p>Standardized networks, cameras, and access control across 18 facilities with better MTTR and audits.</p>
-          <div class="row">
-            <a href="#" onclick="alert('Replace with your PDF link')">Open</a>
-            <a href="#" onclick="alert('Replace with your PDF link')">Download</a>
-          </div>
-        </div>
+    <section id="work" class="card" style="margin-top:16px">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <div class="row"><input class="search" id="q" placeholder="Search projects by name or tag" /><div class="filterbar" id="tagbar"></div></div>
       </div>
-      <div class="card">
-        <h2>Skills</h2>
-        <div class="row">
-          <span class="pill">AI and ML</span>
-          <span class="pill">Cloud Architecture</span>
-          <span class="pill">AWS</span>
-          <span class="pill">GCP</span>
-          <span class="pill">DevOps and SRE</span>
-          <span class="pill">Data Engineering</span>
-          <span class="pill">APIs</span>
-          <span class="pill">Cybersecurity</span>
-          <span class="pill">Identity</span>
-          <span class="pill">HubSpot</span>
-          <span class="pill">GA4</span>
-          <span class="pill">Budget and Vendors</span>
-        </div>
-      </div>
-      <div class="card">
-        <h2 id="resume">Resume</h2>
-        <p class="note">Host a PDF in this repo or on Drive and link it here.</p>
-        <div class="row">
-          <a href="#" onclick="alert('Replace with your resume PDF link')">Open Resume</a>
-          <a href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="card" style="margin-top:16px">
-      <h2>Projects</h2>
-      <input class="search" id="q" placeholder="Search projects by name, tag, or tool" />
-      <div class="filterbar" id="tagbar"></div>
       <div class="grid cols-3" id="projectList" style="margin-top:12px"></div>
       <p class="note">Edit the project data inside this file. Keep it simple and public safe.</p>
+    </section>
+
+    <section id="files" class="card" style="margin-top:16px">
+      <div class="section-title"><h2>Work Samples and Files</h2><span class="right">PDF links recommended</span></div>
+      <div class="gallery" id="fileGallery"></div>
+      <p class="note">Replace each link with a GitHub or Drive URL. PDFs will open in a new tab. DOCX and XLSX will download.</p>
     </section>
 
     <section class="grid cols-2" style="margin-top:16px">
@@ -183,7 +144,7 @@
         <h2>Speaking and Teaching</h2>
         <ul>
           <li>CWNA instructor, College of DuPage.</li>
-          <li>Guest talks on cloud, security, and AI for non technical leaders.</li>
+          <li>Guest talks for non technical leaders on AI, cloud, and security.</li>
         </ul>
       </div>
       <div id="contact" class="card">
@@ -199,47 +160,41 @@
   </div>
 
   <script>
-    // Project data. Replace with your own entries.
+    // Update stamps
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('updated').textContent = new Date().toLocaleDateString();
+
+    // Project data
     const PROJECTS = [
-      {
-        name: "Connect66 Platform",
-        summary: "AI assisted content and CRM workflow with clean analytics. Fast from idea to publish.",
-        tools: ["AI", "GA4", "HubSpot", "Cloud"],
-        links: [{ label: "Repo or Demo", href: "#" }]
-      },
-      {
-        name: "Engineering Delivery System",
-        summary: "Simple delivery rules, CI and CD, and KPI dashboard that cut cycle time.",
-        tools: ["CI/CD", "SRE", "KPI"],
-        links: [{ label: "Overview", href: "#" }]
-      },
-      {
-        name: "Multi Site Infrastructure",
-        summary: "Standardized networks, cameras, and access control across sites with better MTTR.",
-        tools: ["Networking", "Security", "Operations"],
-        links: [{ label: "Case Study", href: "#" }]
-      },
-      {
-        name: "Loopz Family Logistics MVP",
-        summary: "Lightweight app to coordinate family schedules and travel reminders.",
-        tools: ["React", "API", "Mobile"],
-        links: [{ label: "Demo", href: "#" }]
-      }
+      { name: "Connect66 Platform", summary: "AI assisted content and CRM workflow with clean analytics.", tools: ["AI","GA4","HubSpot","Cloud"], links: [{label: "Demo", href: "#"}] },
+      { name: "Engineering Delivery System", summary: "Simple delivery rules, CI and CD, and KPIs that cut cycle time.", tools: ["CI/CD","SRE","KPI"], links: [{label: "Overview", href: "#"}] },
+      { name: "Multi Site Infrastructure", summary: "Standardized networks and access control across 18 facilities.", tools: ["Networking","Security","Ops"], links: [{label: "Case Study", href: "#"}] },
+      { name: "Loopz MVP", summary: "Family logistics MVP for scheduling and travel reminders.", tools: ["React","API","Mobile"], links: [{label: "Demo", href: "#"}] }
     ];
 
-    // Render projects
+    // Files data, add your links
+    const FILES = [
+      { title: "Engineering Team Leadership and Delivery", kind: "PDF", tools: ["Leadership","Delivery"], href: "#" },
+      { title: "Connect66 Launch Case Study", kind: "PDF", tools: ["AI","Content","Analytics"], href: "#" },
+      { title: "Multi Site Infrastructure Case Study", kind: "PDF", tools: ["Networking","Security"], href: "#" },
+      { title: "Skills Matrix", kind: "XLSX", tools: ["Skills","Matrix"], href: "#" },
+      { title: "Certifications and Training", kind: "DOCX", tools: ["Certs"], href: "#" },
+      { title: "Unofficial Transcript Summary", kind: "DOCX", tools: ["Education"], href: "#" },
+      { title: "References", kind: "DOCX", tools: ["References"], href: "#" }
+    ];
+
+    // Render projects with filters
     const list = document.getElementById('projectList');
     const tagbar = document.getElementById('tagbar');
     const q = document.getElementById('q');
     const state = { tag: 'All', q: '' };
-
     function uniqueTags(data) { return ['All', ...Array.from(new Set(data.flatMap(p => p.tools)))] }
-    function card(p) {
-      const tools = p.tools.map(t => `<span class="pill">${t}</span>`).join(' ');
+    function projCard(p){
+      const tags = p.tools.map(t => `<span class="pill">${t}</span>`).join(' ');
       const links = (p.links||[]).map(l => `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join(' ');
-      return `<div class="card proj"><h3>${p.name}</h3><p>${p.summary}</p><div class="row">${tools}</div><div class="row">${links}</div></div>`;
+      return `<div class="tile"><h3>${p.name}</h3><p>${p.summary}</p><div class="row">${tags}</div><div class="row">${links}</div></div>`;
     }
-    function render() {
+    function renderProjects(){
       const term = state.q.toLowerCase();
       const data = PROJECTS.filter(p => {
         const tagOk = state.tag === 'All' || p.tools.includes(state.tag);
@@ -247,22 +202,30 @@
         const qOk = !term || text.includes(term);
         return tagOk && qOk;
       });
-      list.innerHTML = data.map(card).join('');
+      list.innerHTML = data.map(projCard).join('');
     }
-    function renderTags() {
+    function renderTags(){
       tagbar.innerHTML = '';
       uniqueTags(PROJECTS).forEach(t => {
-        const chip = document.createElement('span');
-        chip.className = 'chip' + (t === state.tag ? ' active' : '');
-        chip.textContent = t;
-        chip.onclick = () => { state.tag = t; renderTags(); render(); };
-        tagbar.appendChild(chip);
+        const el = document.createElement('span');
+        el.className = 'chip' + (t === state.tag ? ' active' : '');
+        el.textContent = t;
+        el.onclick = () => { state.tag = t; renderTags(); renderProjects(); };
+        tagbar.appendChild(el);
       });
     }
-    q.addEventListener('input', e => { state.q = e.target.value; render(); });
+    q.addEventListener('input', e => { state.q = e.target.value; renderProjects(); });
     renderTags();
-    render();
-    document.getElementById('year').textContent = new Date().getFullYear();
+    renderProjects();
+
+    // Render files gallery
+    const gal = document.getElementById('fileGallery');
+    gal.innerHTML = FILES.map(f => `
+      <div class="tile">
+        <h3>${f.title} <span class="badge">${f.kind}</span></h3>
+        <div class="tools">${f.tools.join(', ')}</div>
+        <div class="actions"><a href="${f.href}" target="_blank" rel="noopener">Open</a></div>
+      </div>`).join('');
   </script>
 </body>
 </html>
