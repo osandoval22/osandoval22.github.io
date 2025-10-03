@@ -77,7 +77,7 @@
     <div class="nav-inner">
       <div>
         <div class="name">Omar Sandoval</div>
-        <div class="tag">CTO and CIO. Builder and operator. AI, cloud, security, data. Chicago area. Open to remote and hybrid.</div>
+        <div class="tag">CTO and CIO. Builder and operator. AI, cloud, security, data. Chicago area, open to remote.</div>
       </div>
       <div class="row">
         <a class="btn" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
@@ -133,6 +133,12 @@
       <p class="note">Edit the project data inside this file. Keep it simple and public safe.</p>
     </section>
 
+    <section id="awards" class="card" style="margin-top:16px">
+      <div class="section-title"><h2>Awards and Recognition</h2><span class="right">Highlights</span></div>
+      <div class="gallery" id="awardsGallery"></div>
+      <p class="note">Logos and links point to public announcements where available.</p>
+    </section>
+
     <section id="files" class="card" style="margin-top:16px">
       <div class="section-title"><h2>Work Samples and Files</h2><span class="right">PDF links recommended</span></div>
       <div class="gallery" id="fileGallery"></div>
@@ -149,7 +155,7 @@
       </div>
       <div id="contact" class="card">
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:sandoval.om@gmail.com">sandoval.om@gmail.com</a></p>
+        <p>Email: <a href="mailto:omarsandoval@example.com">omarsandoval@example.com</a></p>
         <p>Location: Chicago area. Open to remote and hybrid.</p>
       </div>
     </section>
@@ -174,13 +180,13 @@
 
     // Files data, add your links
     const FILES = [
-      { title: "Engineering Team Leadership and Delivery", kind: "PDF", tools: ["Leadership","Delivery"], href: "#" },
-      { title: "Connect66 Launch Case Study", kind: "PDF", tools: ["AI","Content","Analytics"], href: "#" },
-      { title: "Multi Site Infrastructure Case Study", kind: "PDF", tools: ["Networking","Security"], href: "#" },
-      { title: "Skills Matrix", kind: "XLSX", tools: ["Skills","Matrix"], href: "#" },
-      { title: "Certifications and Training", kind: "DOCX", tools: ["Certs"], href: "#" },
-      { title: "Unofficial Transcript Summary", kind: "DOCX", tools: ["Education"], href: "#" },
-      { title: "References", kind: "DOCX", tools: ["References"], href: "#" }
+      { title: "Engineering Team Leadership and Delivery", kind: "PDF", tools: ["Leadership","Delivery"], href: "/files/omar_sandoval_engineering_leadership.pdf" },
+      { title: "Connect66 Launch Case Study", kind: "PDF", tools: ["AI","Content","Analytics"], href: "/files/omar_sandoval_connect66_case.pdf" },
+      { title: "Multi Site Infrastructure Case Study", kind: "PDF", tools: ["Networking","Security"], href: "/files/omar_sandoval_multisite_infra.pdf" },
+      { title: "Skills Matrix", kind: "XLSX", tools: ["Skills","Matrix"], href: "/files/omar_sandoval_skills_matrix.xlsx" },
+      { title: "Certifications and Training", kind: "PDF", tools: ["Certs"], href: "/files/omar_sandoval_certs_training.pdf" },
+      { title: "Unofficial Transcript Summary", kind: "PDF", tools: ["Education"], href: "/files/omar_sandoval_transcript_summary.pdf" },
+      { title: "References", kind: "PDF", tools: ["References"], href: "/files/omar_sandoval_references.pdf" }
     ];
 
     // Render projects with filters
@@ -225,6 +231,20 @@
         <h3>${f.title} <span class="badge">${f.kind}</span></h3>
         <div class="tools">${f.tools.join(', ')}</div>
         <div class="actions"><a href="${f.href}" target="_blank" rel="noopener">Open</a></div>
+      </div>`).join('');
+
+    // Awards data (add logos later if desired)
+    const AWARDS = [
+      { title: "OnCon Icon Top 50 Technology Professional (2025)", org: "OnConferences", href: "https://www.onconferences.com/25-tech-winners", tag: "Top 50" },
+      { title: "GovTech Top 25 Doers, Dreamers & Drivers (2020)", org: "Government Technology", href: "https://www.govtech.com/top-25/Omar-Sandoval.html", tag: "Top 25" },
+      { title: "Special Districts Technology Innovation Awards (2019)", org: "Special Districts Program", href: "https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516", tag: "Innovation x2" }
+    ];
+    const awardsGal = document.getElementById('awardsGallery');
+    awardsGal.innerHTML = AWARDS.map(a => `
+      <div class="tile">
+        <h3>${a.title} <span class="badge">${a.tag}</span></h3>
+        <div class="tools">${a.org}</div>
+        <div class="actions"><a href="${a.href}" target="_blank" rel="noopener">View</a></div>
       </div>`).join('');
   </script>
 </body>
