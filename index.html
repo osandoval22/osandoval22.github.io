@@ -16,16 +16,17 @@
       --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
       --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45); --radius:18px;
       --border:rgba(255,255,255,.10); --field:#0f1734; --pill:#0e1531;
-      /* KPI + chip variables (dark defaults) */
+
       --kpi-bg:#0c142e; --kpi-ink:#eef2ff; --kpi-muted:#b6c3ff;
       --chip-active:#162349; --chip-ink:#eef2ff;
     }
-    /* THEME: light (auto via prefers-color-scheme) */
+    /* THEME: light (auto by system) */
     :root[data-theme='light']{
       --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
       --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
       --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
       --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+
       --kpi-bg:#f0f4ff; --kpi-ink:#0a1028; --kpi-muted:#51618f;
       --chip-active:#dfe7ff; --chip-ink:#0a1028;
     }
@@ -43,7 +44,7 @@
     *{box-sizing:border-box}
     html,body{
       margin:0; padding:0;
-      background: var(--bg); /* flat background */
+      background: var(--bg);
       color:var(--ink);
       font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
@@ -86,6 +87,7 @@
 
     .section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}
     .muted{color:var(--muted);font-size:13px}
+    .smallcap{font-size:12px;color:var(--muted);letter-spacing:.3px}
 
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
@@ -104,7 +106,6 @@
     .as-seen{display:flex;gap:10px;flex-wrap:wrap}
     .badge{font-size:11px;color:#0b1020;background:linear-gradient(90deg,var(--brand),var(--lime));border-radius:8px;padding:4px 8px;font-weight:700}
 
-    /* Search input */
     .search{
       width:100%; padding:12px 14px; margin-top:10px;
       border-radius:12px; border:1px solid var(--border);
@@ -113,7 +114,6 @@
     .search::placeholder{ color:var(--muted); opacity:.85 }
     .search:focus{ box-shadow:0 0 0 3px var(--ring); border-color:transparent }
 
-    /* Mobile helpers */
     @media (max-width:480px){
       .name{font-size:24px}
       .button{width:100%;justify-content:center}
@@ -121,7 +121,7 @@
   </style>
 </head>
 <body>
-  <!-- build: 2025-10-03 notoggle -->
+  <!-- build: 2025-10-03 cleanup -->
 
   <div class="layout">
     <aside class="sidebar">
@@ -134,12 +134,11 @@
         <div class="row">
           <a class="button" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="button" href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
-          <!-- Theme toggle removed -->
         </div>
       </div>
 
       <div>
-        <div class="pill">As seen in</div>
+        <div class="smallcap">As seen in</div>
         <div class="as-seen" style="margin-top:8px">
           <span class="pill">OnCon Top 50</span>
           <span class="pill">GovTech Top 25</span>
@@ -154,14 +153,23 @@
         <a class="button" href="#speaking">Speaking</a>
         <a class="button" href="#contact">Contact</a>
       </div>
+
+      <!-- Education -->
+      <div style="margin-top:8px">
+        <div class="smallcap">Education</div>
+        <div class="tile" style="margin-top:8px">
+          <strong>Benedictine University</strong>
+          <div class="muted">MBA &amp; MS, Data Analytics • 2019 • GPA 3.8/4.0</div>
+        </div>
+      </div>
     </aside>
 
     <main class="main">
       <section class="card about">
         <div>
           <div class="section-head"><h2>About</h2><span class="muted">Updated <span id="updated"></span></span></div>
-          <p>I turn ideas into shipped systems and scale them with reliability and security. Recent work includes Connect66 traction, multi-site infrastructure across 18 facilities and 1,000+ devices, and teaching CWNA. I care about clear goals, simple rules, and steady coaching.</p>
-          <p class="quote">“Rare mix: exec who ships product, runs ops, and builds in public.”</p>
+          <p>I build practical AI and secure cloud systems that move KPIs: faster delivery, lower risk, and cleaner spend. Recent wins: Connect66 growth, standardized networks across 18 sites, and an engineering cadence that cut cycle time 30%.</p>
+          <p>Need a CTO/CIO who can turn strategy into shipped systems and coach teams to repeat it? That’s my wheelhouse.</p>
           <div class="row"><a class="button" href="#files">Work Samples</a><a class="button" href="#work">Projects</a></div>
         </div>
         <div class="kpis">
@@ -198,64 +206,59 @@
 
       <section id="contact" class="card">
         <h2>Contact</h2>
-        <p>Email: <a id="mailto" href="#">omarsandoval [at] example [dot] com</a></p>
+        <p>Email: <a id="mailto" href="#">sandoval.om@gmail.com</a></p>
         <p>Location: Chicago area. Open to remote and hybrid.</p>
       </section>
 
-      <div class="footer">© <span id="year"></span> Omar Sandoval • Built on GitHub Pages</div>
+      <div class="footer">© 2025 Omar Sandoval</div>
     </main>
   </div>
 
   <script>
     /* General init */
     (function(){
-      var y=document.getElementById('year'); if(y){ y.textContent=new Date().getFullYear(); }
       var u=document.getElementById('updated'); if(u){ u.textContent=new Date().toLocaleDateString(); }
     })();
 
     /* Email */
     (function(){
-      var user='omar', dom='sandoval', tld='com';
-      var addr=user+'.'+dom+'@gmail.'+tld;
+      var addr='sandoval.om@gmail.com';
       var ml=document.getElementById('mailto'); if(ml){ ml.textContent=addr; ml.href='mailto:'+addr; }
     })();
 
     /* Data */
     var PROJECTS=[
-      {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'#'}]},
-      {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'Overview',href:'#'}]},
-      {name:'Multi Site Infrastructure',summary:'Standardized networks and access control across 18 facilities.',tools:['Networking','Security','Ops'],links:[{label:'Case Study',href:'#'}]},
-      {name:'Loopz MVP',summary:'Family logistics MVP for scheduling and reminders.',tools:['React','API','Mobile'],links:[{label:'Demo',href:'#'}]}
+      {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'https://connect66.net/'}]},
+      {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'}]},
+      {name:'Multi-Site Infrastructure',summary:'Standardized networks and access control across 18 facilities.',tools:['Networking','Security','Ops'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Multi%20Site%20Support.pdf'}]}
+      /* Loopz MVP removed */
     ];
+
     var FILES=[
-      {title:'Engineering Team Leadership and Delivery',kind:'PDF',tools:['Leadership','Delivery'],href:'/files/omar_sandoval_engineering_leadership.pdf'},
-      {title:'Connect66 Launch Case Study',kind:'PDF',tools:['AI','Content','Analytics'],href:'/files/omar_sandoval_connect66_case.pdf'},
-      {title:'Multi Site Infrastructure Case Study',kind:'PDF',tools:['Networking','Security'],href:'/files/omar_sandoval_multisite_infra.pdf'},
-      {title:'Skills Matrix',kind:'XLSX',tools:['Skills','Matrix'],href:'/files/omar_sandoval_skills_matrix.xlsx'},
-      {title:'Certifications and Training',kind:'PDF',tools:['Certs'],href:'/files/omar_sandoval_certs_training.pdf'},
-      {title:'Unofficial Transcript Summary',kind:'PDF',tools:['Education'],href:'/files/omar_sandoval_transcript_summary.pdf'},
-      {title:'References',kind:'PDF',tools:['References'],href:'/files/omar_sandoval_references.pdf'}
+      {title:'Engineering Team Leadership and Delivery',kind:'PDF',tools:['Leadership','Delivery'],href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'},
+      {title:'Multi-Site Infrastructure Case Study',kind:'PDF',tools:['Networking','Security'],href:'files/Omar%20Sandoval%20Work%20Multi%20Site%20Support.pdf'}
+      /* Skills Matrix / Certifications / Transcript / References removed */
     ];
+
     var AWARDS=[
       {title:'OnCon Icon Top 50 Technology Professional (2025)',org:'OnConferences',tag:'Top 50',href:'https://www.onconferences.com/25-tech-winners'},
       {title:'GovTech Top 25 Doers, Dreamers & Drivers (2020)',org:'Government Technology',tag:'Top 25',href:'https://www.govtech.com/top-25/Omar-Sandoval.html'},
       {title:'Special Districts Technology Innovation Awards (2019)',org:'Special Districts Program',tag:'Innovation x2',href:'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516'}
     ];
+
     var SPEAKING=[
-      {title:"Illinois Digital Government Summit",role:"Moderator",year:"2022",note:"Security posture session",href:"https://events.govtech.com/Illinois-Digital-Government-Summit-2022"},
-      {title:"Chicago Digital Government Summit",role:"Speaker",year:"2022",note:"Program speaker (bio listed)",href:"https://events.govtech.com/Chicago-Digital-Government-Summit-2022"},
-      {title:"Chicago Digital Government Summit",role:"Featured Speaker",year:"2023",note:"Digital Transformation for Government: The Future is Now",href:"https://events.govtech.com/Chicago-Digital-Government-Summit-2023"},
-      {title:"Chicago Regional Digital Government Summit",role:"Speaker",year:"2024",note:"AI in the public sector — use cases & governance",href:"https://events.govtech.com/Chicago-Regional-Digital-Government-Summit-2024"},
-      {title:"Illinois Public Sector Cybersecurity Summit",role:"Moderator",year:"2024",note:"AI/ML for cyber defense panel",href:"https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit-2024"},
-      {title:"Illinois IT Leadership Forum",role:"Speaker",year:"2024",note:"Program listing",href:"https://events.govtech.com/Illinois-IT-Leadership-Forum-2024"},
-      {title:"Chicago Regional Digital Government Summit",role:"Moderator",year:"2025",note:"Regional leadership panel",href:"https://events.govtech.com/Chicago-Regional-Digital-Government-Summit"},
-      {title:"Illinois Public Sector Cybersecurity Summit",role:"Speaker/Moderator",year:"2025",note:"Event listing (bio section)",href:"https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit.html"},
-      {title:"IPRA Soaring to New Heights Conference",role:"Speaker",year:"2017",note:"Park District Mobile App (Finance/IT track)",href:"https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf"},
-      {title:"GFOA Annual Conference",role:"Speaker",year:"2022",note:"Annual program listing",href:"https://gfoa-craftcms.files.svdcdn.com/production/general/GFOA-2022-Conference-Program.pdf.pdf"},
-      {title:"GFOA – General Session",role:"Featured Speaker",year:"2022",note:"General session page",href:"https://www.gfoa.org/sessions/119th-annual-conference-sessions/general-session--monday-keynote"},
-      {title:"GMIS Illinois – GIANTS Conference",role:"Speaker",year:"2016",note:"Conference directory",href:"https://2016giantsgmisillinois.sched.com/directory/attendees"},
-      {title:"GMIS Illinois – GIANTS Conference",role:"Speaker",year:"2025",note:"Conference sessions and program presence",href:"https://www.linkedin.com/posts/waseem-khan-254b8217b_great-first-day-of-the-gmis-illinois-giants-activity-7317404050524721153-sY-s"},
-      {title:"GMIS International Annual Conference",role:"Speaker",year:"Various",note:"National conference appearances",href:"https://gmis.org/"}
+      { title: "Illinois Digital Government Summit", role: "Moderator", year: "2022", note: "Security posture session", href: "https://events.govtech.com/Illinois-Digital-Government-Summit-2022" },
+      { title: "Chicago Digital Government Summit", role: "Speaker", year: "2022", note: "Program speaker (bio listed)", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2022" },
+      { title: "Chicago Digital Government Summit", role: "Featured Speaker", year: "2023", note: "Digital Transformation for Government: The Future is Now", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2023" },
+      { title: "Chicago Regional Digital Government Summit", role: "Speaker", year: "2024", note: "AI in the public sector — use cases & governance", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit-2024" },
+      { title: "Illinois Public Sector Cybersecurity Summit", role: "Moderator", year: "2024", note: "AI/ML for cyber defense panel", href: "https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit-2024" },
+      { title: "Illinois IT Leadership Forum", role: "Speaker", year: "2024", note: "Program listing", href: "https://events.govtech.com/Illinois-IT-Leadership-Forum-2024" },
+      { title: "Chicago Regional Digital Government Summit", role: "Moderator", year: "2025", note: "Regional leadership panel", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit" },
+      { title: "Illinois Public Sector Cybersecurity Summit", role: "Speaker/Moderator", year: "2025", note: "Event listing (bio section)", href: "https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit.html" },
+      { title: "IPRA Soaring to New Heights Conference", role: "Speaker", year: "2017", note: "Park District Mobile App (Finance/IT track)", href: "https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf" },
+      { title: "GFOA Annual Conference", role: "Speaker", year: "2022", note: "Annual program listing", href: "https://gfoa-craftcms.files.svdcdn.com/production/general/GFOA-2022-Conference-Program.pdf.pdf" },
+      { title: "GFOA – General Session", role: "Featured Speaker", year: "2022", note: "General session page", href: "https://www.gfoa.org/sessions/119th-annual-conference-sessions/general-session--monday-keynote" }
+      /* GMIS 2025 + GMIS International removed */
     ];
 
     /* Helpers */
@@ -345,7 +348,7 @@
       list.innerHTML=html;
     })();
 
-    /* Track file clicks (safe if analytics enabled later) */
+    /* (Optional future analytics: safe no-op if not present) */
     (function(){
       document.body.addEventListener('click',function(e){
         var a=e.target.closest?e.target.closest('a[data-track]'):null;
