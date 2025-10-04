@@ -21,7 +21,6 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    /* THEME: base (dark) */
     :root{
       --bg:#0b0e18; --panel:#0e1324; --panel2:#0b112b;
       --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
@@ -30,7 +29,6 @@
       --kpi-bg:#0c142e; --kpi-ink:#eef2ff; --kpi-muted:#b6c3ff;
       --chip-active:#162349; --chip-ink:#eef2ff;
     }
-    /* THEME: light (auto via system) */
     :root[data-theme='light']{
       --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
       --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
@@ -51,15 +49,11 @@
     }
 
     *{box-sizing:border-box}
-    html,body{
-      margin:0; padding:0;
-      background: var(--bg); color:var(--ink);
-      font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+      font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* Layout */
     .layout{display:grid;grid-template-columns:320px 1fr;gap:24px;max-width:1200px;margin:0 auto;padding:24px}
     @media (max-width:1024px){.layout{grid-template-columns:1fr}}
     .sidebar{
@@ -71,25 +65,22 @@
     @media (max-width:1024px){.sidebar{position:static;height:auto}}
     .brandcard{display:grid;gap:10px}
 
-    /* Avatar with your headshot */
-    .avatar{
-      width:92px; height:92px; border-radius:20px; /* use 50% for circle */
-      background:linear-gradient(135deg,#1e2a66,#10204a);
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-    }
-    .avatar img{width:100%; height:100%; object-fit:cover; display:block; border-radius:20px}
+    .avatar{width:92px;height:92px;border-radius:20px;background:linear-gradient(135deg,#1e2a66,#10204a);
+      display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
 
     .name{font-family:Space Grotesk,Inter,sans-serif;font-weight:700;font-size:28px}
     .title{color:var(--muted);font-size:14px}
-    .button{display:inline-flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--border);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
+    .button{display:inline-flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--border);
+      padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
     .button:hover{box-shadow:0 0 0 3px var(--ring)}
     .linklist{display:grid;gap:8px}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--pill);color:var(--muted);font-size:12px;border:1px solid var(--border)}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--pill);
+      color:var(--muted);font-size:12px;border:1px solid var(--border)}
 
     .main{display:grid;gap:24px}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);
+      border-radius:24px;padding:22px;box-shadow:var(--shadow)}
     h2{margin:0 0 12px;font-size:22px}
     .about{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
     @media (max-width:900px){.about{grid-template-columns:1fr}}
@@ -133,8 +124,6 @@
   </style>
 </head>
 <body>
-  <!-- build: headshot-png -->
-
   <div class="layout">
     <aside class="sidebar">
       <div class="brandcard">
@@ -166,7 +155,6 @@
         <a class="button" href="#contact">Contact</a>
       </div>
 
-      <!-- Education -->
       <div style="margin-top:8px">
         <div class="smallcap">Education</div>
         <div class="tile" style="margin-top:8px">
@@ -227,18 +215,15 @@
   </div>
 
   <script>
-    /* Updated stamp */
     (function(){
       var u=document.getElementById('updated'); if(u){ u.textContent=new Date().toLocaleDateString(); }
     })();
 
-    /* Email */
     (function(){
       var addr='sandoval.om@gmail.com';
       var ml=document.getElementById('mailto'); if(ml){ ml.textContent=addr; ml.href='mailto:'+addr; }
     })();
 
-    /* Data */
     var PROJECTS=[
       {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'https://connect66.net/'}]},
       {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'}]},
@@ -256,7 +241,7 @@
       {title:'Special Districts Technology Innovation Awards (2019)',org:'Special Districts Program',tag:'Innovation x2',href:'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516'}
     ];
 
-    /* Speaking (2023 added; GMIS removed; GFOA link stable) */
+    /* SPEAKING: Removed "GFOA Annual Conference" and updated "GFOA – General Session" link */
     var SPEAKING = [
       /* 2025 */
       { title: "Chicago Regional Digital Government Summit", role: "Moderator", year: "2025", note: "Regional leadership panel", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit" },
@@ -276,15 +261,13 @@
       { title: "Illinois Digital Government Summit", role: "Moderator", year: "2022", note: "Security posture session", href: "https://events.govtech.com/Illinois-Digital-Government-Summit-2022" },
       { title: "Chicago Digital Government Summit", role: "Speaker", year: "2022", note: "Program speaker (bio listed)", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2022" },
 
-      /* GFOA (stable link) */
-      { title: "GFOA Annual Conference", role: "Speaker", year: "2022", note: "Annual program", href: "https://www.gfoa.org/annual-conference" },
-      { title: "GFOA – General Session", role: "Featured Speaker", year: "2022", note: "General session page", href: "https://www.gfoa.org/sessions/119th-annual-conference-sessions/general-session--monday-keynote" },
+      /* GFOA (only the General Session, link updated) */
+      { title: "GFOA – General Session", role: "Featured Speaker", year: "2022", note: "General session bio", href: "https://www.gfoa.org/bio/sandoval" },
 
       /* IPRA */
       { title: "IPRA Soaring to New Heights Conference", role: "Speaker", year: "2017", note: "Park District Mobile App (Finance/IT track)", href: "https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf" }
     ];
 
-    /* Helpers */
     function uniqTags(arr){
       var set={}, out=['All'];
       for(var i=0;i<arr.length;i++){
@@ -299,14 +282,13 @@
       return "<div class='tile'><h3>"+p.name+"</h3><p>"+p.summary+"</p><div class='row'>"+tags+"</div><div class='row'>"+links+"</div></div>";
     }
 
-    /* Projects render + tags + search */
     (function(){
       var list=document.getElementById('projectList');
       var tagbar=document.getElementById('tagbar');
       var search=document.getElementById('q');
       var state={tag:'All',q:''};
 
-    function renderProjects(){
+      function renderProjects(){
         if(!list) return;
         var term=state.q.toLowerCase(), html='';
         for(var i=0;i<PROJECTS.length;i++){
@@ -338,7 +320,6 @@
       renderTags(); renderProjects();
     })();
 
-    /* Files render */
     (function(){
       var gal=document.getElementById('fileGallery'); if(!gal) return;
       var html='';
@@ -349,7 +330,6 @@
       gal.innerHTML=html;
     })();
 
-    /* Awards render */
     (function(){
       var gal=document.getElementById('awardsGallery'); if(!gal) return;
       var html='';
@@ -360,7 +340,6 @@
       gal.innerHTML=html;
     })();
 
-    /* Speaking render */
     (function(){
       var list=document.getElementById('speakingList'); if(!list) return;
       var html='';
@@ -371,7 +350,6 @@
       list.innerHTML=html;
     })();
 
-    /* Placeholder analytics hook */
     (function(){
       document.body.addEventListener('click',function(e){
         var a=e.target.closest?e.target.closest('a[data-track]'):null;
