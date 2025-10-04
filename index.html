@@ -20,7 +20,7 @@
       --kpi-bg:#0c142e; --kpi-ink:#eef2ff; --kpi-muted:#b6c3ff;
       --chip-active:#162349; --chip-ink:#eef2ff;
     }
-    /* THEME: light */
+    /* THEME: light (auto via prefers-color-scheme) */
     :root[data-theme='light']{
       --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
       --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
@@ -29,7 +29,6 @@
       --kpi-bg:#f0f4ff; --kpi-ink:#0a1028; --kpi-muted:#51618f;
       --chip-active:#dfe7ff; --chip-ink:#0a1028;
     }
-    /* Respect system light when no manual choice is saved */
     @media (prefers-color-scheme: light){
       :root:not([data-theme="dark"]){
         --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
@@ -44,7 +43,7 @@
     *{box-sizing:border-box}
     html,body{
       margin:0; padding:0;
-      background: var(--bg); /* flat background (no gradients) */
+      background: var(--bg); /* flat background */
       color:var(--ink);
       font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
@@ -120,11 +119,9 @@
       .button{width:100%;justify-content:center}
     }
   </style>
-
-  <!-- (analytics blocks optional; keep commented until ready) -->
 </head>
 <body>
-  <!-- build: 2025-10-03 nogradient -->
+  <!-- build: 2025-10-03 notoggle -->
 
   <div class="layout">
     <aside class="sidebar">
@@ -137,7 +134,7 @@
         <div class="row">
           <a class="button" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="button" href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
-          <button class="button" id="themeToggle" aria-label="Toggle theme">☀️ Light</button>
+          <!-- Theme toggle removed -->
         </div>
       </div>
 
@@ -201,7 +198,7 @@
 
       <section id="contact" class="card">
         <h2>Contact</h2>
-        <p>Email: <a id="mailto" href="#">sandoval.om@gmail.com</a></p>
+        <p>Email: <a id="mailto" href="#">omarsandoval [at] example [dot] com</a></p>
         <p>Location: Chicago area. Open to remote and hybrid.</p>
       </section>
 
@@ -210,17 +207,6 @@
   </div>
 
   <script>
-    /* Theme toggle */
-    (function(){
-      var ROOT=document.documentElement, KEY='omar-theme';
-      var btn=document.getElementById('themeToggle');
-      function apply(t){ t?ROOT.setAttribute('data-theme',t):ROOT.removeAttribute('data-theme'); }
-      function label(){ if(!btn) return; btn.textContent=(ROOT.getAttribute('data-theme')==='light')?'🌙 Dark':'☀️ Light'; }
-      try{ var saved=localStorage.getItem(KEY); if(saved){ apply(saved);} }catch(e){}
-      label();
-      if(btn){ btn.addEventListener('click',function(){ var now=(ROOT.getAttribute('data-theme')==='light')?'dark':'light'; apply(now); try{localStorage.setItem(KEY,now);}catch(e){} label();}); }
-    })();
-
     /* General init */
     (function(){
       var y=document.getElementById('year'); if(y){ y.textContent=new Date().getFullYear(); }
