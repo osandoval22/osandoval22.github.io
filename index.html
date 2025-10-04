@@ -5,19 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Omar Sandoval • CTO / CIO Portfolio</title>
   <meta name="description" content="CTO and CIO. Builder and operator. AI, cloud, security, data. Portfolio, awards, work samples, and speaking." />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+  <!-- Preload headshot for crisp paint -->
+  <link rel="preload" as="image" href="img/omar-sandoval-headshot.jpg">
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Omar Sandoval • CTO/CIO">
+  <meta property="og:description" content="CTO/CIO. AI, cloud, security. Delivery-focused, scalable systems, and steady coaching.">
+  <meta property="og:image" content="https://osandoval22.github.io/img/omar-sandoval-headshot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
+    /* THEME: base (dark) */
     :root{
       --bg:#0b0e18; --panel:#0e1324; --panel2:#0b112b;
       --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
-      --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45); --radius:18px;
+      --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45);
       --border:rgba(255,255,255,.10); --field:#0f1734; --pill:#0e1531;
       --kpi-bg:#0c142e; --kpi-ink:#eef2ff; --kpi-muted:#b6c3ff;
       --chip-active:#162349; --chip-ink:#eef2ff;
     }
+    /* THEME: light (auto via system) */
     :root[data-theme='light']{
       --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
       --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
@@ -40,13 +53,13 @@
     *{box-sizing:border-box}
     html,body{
       margin:0; padding:0;
-      background: var(--bg);
-      color:var(--ink);
+      background: var(--bg); color:var(--ink);
       font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
+    /* Layout */
     .layout{display:grid;grid-template-columns:320px 1fr;gap:24px;max-width:1200px;margin:0 auto;padding:24px}
     @media (max-width:1024px){.layout{grid-template-columns:1fr}}
     .sidebar{
@@ -57,8 +70,17 @@
     }
     @media (max-width:1024px){.sidebar{position:static;height:auto}}
     .brandcard{display:grid;gap:10px}
-    .avatar{width:92px;height:92px;border-radius:20px;background:linear-gradient(135deg,#1e2a66,#10204a);display:grid;place-items:center;border:1px solid rgba(255,255,255,.12)}
-    .avatar svg{width:60px;height:60px}
+
+    /* Avatar using your headshot */
+    .avatar{
+      width:92px; height:92px; border-radius:20px;
+      background:linear-gradient(135deg,#1e2a66,#10204a);
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block; border-radius:20px}
+
     .name{font-family:Space Grotesk,Inter,sans-serif;font-weight:700;font-size:28px}
     .title{color:var(--muted);font-size:14px}
     .button{display:inline-flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--border);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
@@ -101,11 +123,7 @@
     .as-seen{display:flex;gap:10px;flex-wrap:wrap}
     .badge{font-size:11px;color:#0b1020;background:linear-gradient(90deg,var(--brand),var(--lime));border-radius:8px;padding:4px 8px;font-weight:700}
 
-    .search{
-      width:100%; padding:12px 14px; margin-top:10px;
-      border-radius:12px; border:1px solid var(--border);
-      background:var(--field); color:var(--ink); outline:none; font-size:14px;
-    }
+    .search{width:100%; padding:12px 14px; margin-top:10px; border-radius:12px; border:1px solid var(--border); background:var(--field); color:var(--ink); outline:none; font-size:14px}
     .search::placeholder{ color:var(--muted); opacity:.85 }
     .search:focus{ box-shadow:0 0 0 3px var(--ring); border-color:transparent }
 
@@ -116,13 +134,13 @@
   </style>
 </head>
 <body>
-  <!-- build: 2025-10-03 full-refresh -->
+  <!-- build: headshot-integrated -->
 
   <div class="layout">
     <aside class="sidebar">
       <div class="brandcard">
-        <div class="avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8ef7d0" stroke-width="1.2"><path d="M12 12a5 5 0 100-10 5 5 0 000 10z"/><path d="M3 22a9 9 0 0118 0"/></svg>
+        <div class="avatar">
+          <img src="img/omar-sandoval-headshot.jpg" alt="Omar Sandoval" loading="lazy" decoding="async" />
         </div>
         <div class="name">Omar Sandoval</div>
         <div class="title">CTO / CIO • AI, Cloud, Security, Data • Chicago area, open to remote</div>
@@ -210,15 +228,18 @@
   </div>
 
   <script>
+    /* Updated stamp */
     (function(){
       var u=document.getElementById('updated'); if(u){ u.textContent=new Date().toLocaleDateString(); }
     })();
 
+    /* Email */
     (function(){
       var addr='sandoval.om@gmail.com';
       var ml=document.getElementById('mailto'); if(ml){ ml.textContent=addr; ml.href='mailto:'+addr; }
     })();
 
+    /* Data */
     var PROJECTS=[
       {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'https://connect66.net/'}]},
       {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'}]},
@@ -236,7 +257,7 @@
       {title:'Special Districts Technology Innovation Awards (2019)',org:'Special Districts Program',tag:'Innovation x2',href:'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516'}
     ];
 
-    /* 2023 items added; GMIS 2025 & GMIS International removed; GFOA link fixed */
+    /* 2023 added; GMIS items removed; GFOA link stable */
     var SPEAKING = [
       /* 2025 */
       { title: "Chicago Regional Digital Government Summit", role: "Moderator", year: "2025", note: "Regional leadership panel", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit" },
@@ -264,6 +285,7 @@
       { title: "IPRA Soaring to New Heights Conference", role: "Speaker", year: "2017", note: "Park District Mobile App (Finance/IT track)", href: "https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf" }
     ];
 
+    /* Helpers */
     function uniqTags(arr){
       var set={}, out=['All'];
       for(var i=0;i<arr.length;i++){
@@ -278,6 +300,7 @@
       return "<div class='tile'><h3>"+p.name+"</h3><p>"+p.summary+"</p><div class='row'>"+tags+"</div><div class='row'>"+links+"</div></div>";
     }
 
+    /* Projects render + tags + search */
     (function(){
       var list=document.getElementById('projectList');
       var tagbar=document.getElementById('tagbar');
@@ -316,6 +339,7 @@
       renderTags(); renderProjects();
     })();
 
+    /* Files render */
     (function(){
       var gal=document.getElementById('fileGallery'); if(!gal) return;
       var html='';
@@ -326,6 +350,7 @@
       gal.innerHTML=html;
     })();
 
+    /* Awards render */
     (function(){
       var gal=document.getElementById('awardsGallery'); if(!gal) return;
       var html='';
@@ -336,6 +361,7 @@
       gal.innerHTML=html;
     })();
 
+    /* Speaking render */
     (function(){
       var list=document.getElementById('speakingList'); if(!list) return;
       var html='';
@@ -346,6 +372,7 @@
       list.innerHTML=html;
     })();
 
+    /* Future analytics safe hooks */
     (function(){
       document.body.addEventListener('click',function(e){
         var a=e.target.closest?e.target.closest('a[data-track]'):null;
