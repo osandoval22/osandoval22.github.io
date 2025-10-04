@@ -1,246 +1,436 @@
-html = r"""<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Omar Sandoval</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Omar Sandoval • CTO / CIO Portfolio</title>
+  <meta name="description" content="CTO and CIO. Builder and operator. AI, cloud, security, data. Portfolio, awards, work samples, speaking, and media." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Preload headshot -->
+  <link rel="preload" as="image" href="img/omar-sandoval-headshot.png">
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Omar Sandoval • CTO/CIO">
+  <meta property="og:description" content="CTO/CIO. AI, cloud, security. Delivery-focused, scalable systems, and steady coaching.">
+  <meta property="og:image" content="https://osandoval22.github.io/img/omar-sandoval-headshot.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
     :root{
-      --bg:#0b1020;
-      --panel:#121931;
-      --panel-2:#0f1730;
-      --card:#10182f;
-      --muted:#9fb2d9;
-      --text:#e8efff;
-      --accent:#6aa3ff;
-      --chip:#1b2446;
-      --chip-border:#26315e;
-      --radius:16px;
-      --radius-lg:22px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --bg:#0b0e18; --panel:#0e1324; --panel2:#0b112b;
+      --ink:#eef2ff; --muted:#b6c3ff; --brand:#7aa2ff; --lime:#8ef7d0; --gold:#ffd27a;
+      --ring:rgba(122,162,255,.35); --shadow:0 12px 40px rgba(0,0,0,.45);
+      --border:rgba(255,255,255,.10); --field:#0f1734; --pill:#0e1531;
+      --kpi-bg:#0c142e; --kpi-ink:#eef2ff; --kpi-muted:#b6c3ff;
+      --chip-active:#162349; --chip-ink:#eef2ff;
     }
+    :root[data-theme='light']{
+      --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
+      --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
+      --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
+      --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+      --kpi-bg:#f0f4ff; --kpi-ink:#0a1028; --kpi-muted:#51618f;
+      --chip-active:#dfe7ff; --chip-ink:#0a1028;
+    }
+    @media (prefers-color-scheme: light){
+      :root:not([data-theme="dark"]){
+        --bg:#f7f8ff; --panel:#ffffff; --panel2:#f6f8ff;
+        --ink:#0a1028; --muted:#51618f; --brand:#335dff; --lime:#17c6a3; --gold:#a66b00;
+        --ring:rgba(51,93,255,.25); --shadow:0 8px 26px rgba(0,0,0,.12);
+        --border:rgba(8,20,60,.12); --field:#f3f6ff; --pill:#ebefff;
+        --kpi-bg:#f0f4ff; --kpi-ink:#0a1028; --kpi-muted:#51618f;
+        --chip-active:#dfe7ff; --chip-ink:#0a1028;
+      }
+    }
+
     *{box-sizing:border-box}
-    html,body{margin:0;background:linear-gradient(180deg,#0a0f20 0%,#0a1026 100%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-    a{color:var(--accent);text-decoration:none}
-    .wrap{max-width:1120px;margin:32px auto;padding:0 16px;display:grid;grid-template-columns:300px 1fr;gap:24px}
-    /* Sidebar */
-    .side{background:var(--panel);border:1px solid #1f2a54;border-radius:var(--radius-lg);padding:18px;position:sticky;top:18px;align-self:start;box-shadow:var(--shadow)}
-    .avatar{width:88px;height:88px;border-radius:16px;overflow:hidden;border:1px solid #2a3975;box-shadow:0 8px 18px rgba(0,0,0,.35)}
-    .avatar img{width:100%;height:100%;object-fit:cover}
-    .name{font-size:28px;font-weight:800;margin:12px 0 6px}
-    .tagline{color:var(--muted);font-size:14px}
-    .btnrow{display:flex;gap:12px;margin:14px 0 10px}
-    .btn{background:var(--chip);border:1px solid var(--chip-border);padding:8px 12px;border-radius:12px;color:var(--text);font-weight:600}
-    .chiprow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
-    .chip{background:var(--chip);border:1px solid var(--chip-border);padding:6px 10px;border-radius:999px;font-size:12px;color:#c9d8ff}
-    .side .section-link{display:block;background:var(--panel-2);border:1px solid #1b2346;border-radius:14px;padding:12px 14px;margin-top:10px}
-    .side h4{margin:18px 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b9c8f5}
-    .edu{background:var(--panel-2);border:1px solid #1b2346;border-radius:14px;padding:12px;margin-top:14px}
-    .edu h5{margin:0 0 4px;font-size:15px}
-    .edu p{margin:0;color:#c8d6ff;font-size:13px}
-    /* Main */
-    .main{display:flex;flex-direction:column;gap:24px}
-    .card{background:var(--panel);border:1px solid #1f2a54;border-radius:var(--radius-lg);box-shadow:var(--shadow)}
-    .pad{padding:16px}
-    .about h2{margin:0 0 8px}
-    .about p{margin:0 0 12px;color:#d9e6ff}
-    /* Metrics strip */
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0}
-    .metric{background:var(--card);border:1px solid #243063;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
-    .metric .kpi{font-size:28px;font-weight:900}
-    .metric .label{font-size:13px;color:#afc1ef}
-    /* Hands-on leadership banner sits across the bottom */
-    .hol{margin-top:14px;background:linear-gradient(90deg,#132147,#182a5a);border:1px solid #243063;border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .hol .text{font-size:14px;color:#d7e6ff;max-width:70%}
-    .pillrow{display:flex;gap:8px;flex-wrap:wrap}
-    .pill{background:var(--chip);border:1px solid var(--chip-border);border-radius:999px;padding:6px 10px;font-size:12px}
-    .srcbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid #28407a;background:#0e1530;border-radius:10px;padding:8px 10px}
-    /* Awards grid 4-up */
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .award{background:var(--card);border:1px solid #253267;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
-    .award h3{font-size:16px;margin:0}
-    .award .badge{font-size:12px;background:#10305f;border:1px solid #284b8f;border-radius:999px;padding:4px 8px;color:#cfe1ff;display:inline-block}
-    .award .org{font-size:13px;color:#b3c6f5}
-    .award .view{margin-top:auto;align-self:flex-start}
-    /* Media grid */
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .media{background:var(--card);border:1px solid #253267;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
-    .media .type{font-size:12px;background:#10305f;border:1px solid #284b8f;border-radius:999px;padding:3px 8px;color:#cfe1ff;display:inline-block}
-    .media h4{margin:4px 0 2px;font-size:15px}
-    .media p{margin:0;color:#b9c9f2;font-size:13px}
-    .media a.view{margin-top:auto;align-self:flex-start}
-    /* Responsive */
-    @media (max-width:1020px){
-      .wrap{grid-template-columns:1fr}
-      .side{position:static}
-      .grid-4{grid-template-columns:repeat(2,1fr)}
-      .grid-3{grid-template-columns:repeat(2,1fr)}
-      .metrics{grid-template-columns:repeat(3,1fr)}
-      .hol .text{max-width:100%}
+    html,body{
+      margin:0; padding:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
-    @media (max-width:680px){
-      .metrics{grid-template-columns:1fr}
-      .grid-4,.grid-3{grid-template-columns:1fr}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:24px;max-width:1200px;margin:0 auto;padding:24px}
+    @media (max-width:1024px){.layout{grid-template-columns:1fr}}
+    .sidebar{
+      position:sticky; top:18px; height:calc(100dvh - 36px);
+      display:grid; grid-template-rows:auto 1fr auto; gap:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border); border-radius:24px; padding:20px; box-shadow:var(--shadow);
+    }
+    @media (max-width:1024px){.sidebar{position:static;height:auto}}
+    .brandcard{display:grid;gap:10px}
+
+    .avatar{
+      width:92px;height:92px;border-radius:20px;
+      background:linear-gradient(135deg,#1e2a66,#10204a);
+      display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);overflow:hidden;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
+
+    .name{font-family:Space Grotesk,Inter,sans-serif;font-weight:700;font-size:28px}
+    .title{color:var(--muted);font-size:14px}
+    .button{display:inline-flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--border);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;white-space:nowrap}
+    .button:hover{box-shadow:0 0 0 3px var(--ring)}
+    .linklist{display:grid;gap:8px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--pill);color:var(--muted);font-size:12px;border:1px solid var(--border)}
+
+    .main{display:grid;gap:24px}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+    h2{margin:0 0 12px;font-size:22px}
+    .about{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+    @media (max-width:900px){.about{grid-template-columns:1fr}}
+
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+    @media (max-width:540px){.kpis{grid-template-columns:1fr}}
+
+    .kpi{background:var(--kpi-bg);border:1px solid var(--border);border-radius:16px;padding:14px;display:grid;gap:6px}
+    .kpi .label{font-size:12px;color:var(--kpi-muted)}
+    .kpi .value{font-size:30px;font-weight:800;letter-spacing:.2px;color:var(--kpi-ink)}
+
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:13px}
+    .smallcap{font-size:12px;color:var(--muted);letter-spacing:.3px}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){.grid-3{grid-template-columns:1fr}}
+
+    .tile{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:16px;padding:14px;display:grid;gap:8px}
+    .tile h3{margin:0;font-size:16px}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tab{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--field);cursor:pointer;font-size:14px}
+    .tab.active{background:var(--chip-active);color:var(--chip-ink);border-color:transparent;box-shadow:0 0 0 2px var(--ring)}
+
+    .footer{color:var(--muted);font-size:14px;padding:20px 0}
+    .as-seen{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{font-size:11px;color:#0b1020;background:linear-gradient(90deg,var(--brand),var(--lime));border-radius:8px;padding:4px 8px;font-weight:700}
+
+    .search{width:100%; padding:12px 14px; margin-top:10px; border-radius:12px; border:1px solid var(--border); background:var(--field); color:var(--ink); outline:none; font-size:14px}
+    .search::placeholder{ color:var(--muted); opacity:.85 }
+    .search:focus{ box-shadow:0 0 0 3px var(--ring); border-color:transparent }
+
+    .meta p{margin:6px 0 6px;color:var(--ink)}
+    .meta .pill{background:var(--pill)}
+    @media (max-width:480px){
+      .name{font-size:24px}
+      .button{width:100%;justify-content:center}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Sidebar -->
-    <aside class="side">
-      <div class="avatar"><img src="https://avatars.githubusercontent.com/u/63202888?v=4" alt="Omar Sandoval headshot"></div>
-      <div class="name">Omar Sandoval</div>
-      <div class="tagline">CTO, CIO. AI, Cloud, Security, Data. Chicago area, open to remote</div>
-
-      <div class="btnrow">
-        <a class="btn" href="https://www.linkedin.com/in/osandoval22/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/osandoval22/" target="_blank" rel="noopener">GitHub</a>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brandcard">
+        <div class="avatar">
+          <img src="img/omar-sandoval-headshot.png" alt="Omar Sandoval" loading="lazy" decoding="async" />
+        </div>
+        <div class="name">Omar Sandoval</div>
+        <div class="title">CTO / CIO • AI, Cloud, Security, Data • Chicago area, open to remote</div>
+        <div class="row">
+          <a class="button" href="https://www.linkedin.com/in/omar-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="button" href="https://github.com/osandoval22" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
 
-      <h4>As seen in</h4>
-      <div class="chiprow">
-        <span class="chip">OnCon Top 50</span>
-        <span class="chip">GovTech Top 25</span>
-        <span class="chip">Innovation x2</span>
+      <div>
+        <div class="smallcap">As seen in</div>
+        <div class="as-seen" style="margin-top:8px">
+          <span class="pill">OnCon Top 50</span>
+          <span class="pill">GovTech Top 25</span>
+          <span class="pill">Innovation x2</span>
+        </div>
       </div>
 
-      <a class="section-link" href="#projects">Projects</a>
-      <a class="section-link" href="#samples">Work Samples</a>
-      <a class="section-link" href="#awards">Awards</a>
-      <a class="section-link" href="#speaking">Speaking</a>
-      <a class="section-link" href="#media">Media</a>
-      <a class="section-link" href="#contact">Contact</a>
+      <div class="linklist">
+        <a class="button" href="#work">Projects</a>
+        <a class="button" href="#files">Work Samples</a>
+        <a class="button" href="#awards">Awards</a>
+        <a class="button" href="#speaking">Speaking</a>
+        <a class="button" href="#media">Media</a>
+        <a class="button" href="#contact">Contact</a>
+      </div>
 
-      <!-- Education panel aligned so it does not stick out -->
-      <div class="edu">
-        <h5>Benedictine University</h5>
-        <p>MBA and MS, Data Analytics, 2019. GPA 3.8</p>
+      <div style="margin-top:8px">
+        <div class="smallcap">Education</div>
+        <div class="tile" style="margin-top:8px">
+          <strong>Benedictine University</strong>
+          <div class="muted">MBA &amp; MS, Data Analytics • 2019 • GPA 3.8/4.0</div>
+        </div>
       </div>
     </aside>
 
-    <!-- Main content -->
     <main class="main">
+      <section class="card about">
+        <div>
+          <div class="section-head"><h2>About</h2><span class="muted">Updated <span id="updated"></span></span></div>
+          <p>I build practical AI and secure cloud systems that move KPIs: faster delivery, lower risk, and cleaner spend. Recent wins: Connect66 growth, standardized networks across 18 sites, and an engineering cadence that cut cycle time 30%.</p>
+          <p>Need a CTO/CIO who turns strategy into shipped systems and coaches teams to repeat it? That’s my wheelhouse.</p>
+          <div class="row"><a class="button" href="#files">Work Samples</a><a class="button" href="#work">Projects</a></div>
 
-      <!-- About -->
-      <section class="card about pad">
-        <h2>About</h2>
-        <p>I build practical AI and secure cloud systems that move KPIs: faster delivery, lower risk, and cleaner spend. Recent wins: Connect66 growth, standardized networks across 18 sites, and an engineering cadence that cut cycle time 30 percent.</p>
-        <p>Need a CTO or CIO who turns strategy into shipped systems and coaches teams to repeat it? That is my wheelhouse.</p>
-
-        <!-- Metrics move up, banner across bottom -->
-        <div class="metrics">
-          <div class="metric">
-            <div class="kpi">15k+</div>
-            <div class="label">Organic touches in three weeks</div>
-          </div>
-          <div class="metric">
-            <div class="kpi">18 sites</div>
-            <div class="label">Network and access control</div>
-          </div>
-          <div class="metric">
-            <div class="kpi">30%</div>
-            <div class="label">Cycle time reduction</div>
-          </div>
-        </div>
-
-        <div class="hol">
-          <div class="text">
-            <strong>Hands-on leadership.</strong> I still build. This site was designed, coded, and deployed by me with GitHub Pages and vanilla JS. I use ChatGPT to speed up drafts and ideas, then I edit, ship, and own the code.
-            <div class="pillrow" style="margin-top:8px">
+          <div class="tile meta">
+            <div class="smallcap">Hands-on leadership</div>
+            <p>I still build. This site was designed, coded, and deployed by me with GitHub Pages and vanilla JS. I use ChatGPT to speed up drafts and ideas—then I edit, ship, and own the code.</p>
+            <div class="row">
               <span class="pill">GitHub Pages</span>
               <span class="pill">Vanilla JS</span>
               <span class="pill">No framework</span>
-              <span class="pill">AI assisted</span>
+              <span class="pill">AI-assisted</span>
+            </div>
+            <div class="row">
+              <a class="button" href="https://github.com/osandoval22/osandoval22.github.io" target="_blank" rel="noopener">View Source</a>
             </div>
           </div>
-          <a class="srcbtn" href="https://github.com/osandoval22/osandoval22.github.io" target="_blank" rel="noopener">View Source</a>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi"><div class="label">Recent</div><div class="value">15k+</div><div class="muted">Organic touches in three weeks</div></div>
+          <div class="kpi"><div class="label">Scale</div><div class="value">18 sites</div><div class="muted">Network & access control</div></div>
+          <div class="kpi"><div class="label">Delivery</div><div class="value">30%</div><div class="muted">Cycle time reduction</div></div>
         </div>
       </section>
 
-      <!-- Awards 4-up -->
-      <section id="awards" class="card pad">
-        <h2>Awards and Recognition</h2>
-        <div class="grid-4">
-          <div class="award">
-            <span class="badge">Digital</span>
-            <h3>Digital Magazine of the Year 2024</h3>
-            <div class="org">GovTech, e.Republic</div>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="award">
-            <span class="badge">Top 50</span>
-            <h3>OnCon Icon Top 50 Technology Professional 2025</h3>
-            <div class="org">OnConferences</div>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="award">
-            <span class="badge">Top 25</span>
-            <h3>GovTech Top 25 Doers, Dreamers, Drivers 2020</h3>
-            <div class="org">Government Technology</div>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="award">
-            <span class="badge">Innovation x2</span>
-            <h3>Special Districts Technology Innovation Awards 2019</h3>
-            <div class="org">Special Districts Program</div>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
+      <section id="work" class="card">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <div class="tabs" id="tagbar"></div>
         </div>
+        <div style="height:6px"></div>
+        <input class="search" id="q" placeholder="Search projects by name or tag" />
+        <div class="grid-3" id="projectList" style="margin-top:12px"></div>
       </section>
 
-      <!-- Media grid, with Chicago Digital Government Summit removed -->
-      <section id="media" class="card pad">
-        <h2>Media, Interviews, Webinars, and Panels</h2>
-        <div class="grid-3">
-          <div class="media">
-            <span class="type">Case Study</span>
-            <h4>Ruckus Networks Case Study, Naperville Park District</h4>
-            <p>District-wide Wi-Fi modernization across parks and facilities.</p>
-            <a class="btn view" href="https://www.ruckusnetworks.com/resources/case-studies/naperville-park-district/" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="media">
-            <span class="type">Video</span>
-            <h4>Free Wi-Fi at Several Park District Locations</h4>
-            <p>Local news segment on district Wi-Fi rollout.</p>
-            <a class="btn view" href="https://archive.org/details/npctv-Free_Wi-Fi_Now_at_Several_Park_District_Locations" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="media">
-            <span class="type">Podcast page</span>
-            <h4>DYOPATH Podcast, Episode Listing</h4>
-            <p>Show page listing the episode.</p>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="media">
-            <span class="type">Podcast (YouTube)</span>
-            <h4>DYOPATH Connections Podcast, Adapting in Times of Change</h4>
-            <p>Guest interview.</p>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="media">
-            <span class="type">Article, GovTech</span>
-            <h4>Are We Witnessing the Death of the Password</h4>
-            <p>Round-up featuring Omar.</p>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-          <div class="media">
-            <span class="type">Local news, Patch</span>
-            <h4>Naperville Park District App, Local Coverage</h4>
-            <p>App launch quote and feature.</p>
-            <a class="btn view" href="#" target="_blank" rel="noopener">View</a>
-          </div>
-        </div>
+      <section id="awards" class="card">
+        <div class="section-head"><h2>Awards & Recognition</h2><span class="muted">Highlights</span></div>
+        <div class="grid-3" id="awardsGallery"></div>
       </section>
 
-      <section id="contact" class="card pad">
+      <section id="speaking" class="card">
+        <div class="section-head"><h2>Speaking & Programs</h2><span class="muted">Selected public talks, panels, and moderations</span></div>
+        <div class="grid-3" id="speakingList"></div>
+      </section>
+
+      <section id="media" class="card">
+        <div class="section-head">
+          <h2>Media (Interviews, Webinars & Panels)</h2>
+          <span class="muted">Selected recordings, case studies, articles, and webinar pages</span>
+        </div>
+        <div class="grid-3" id="mediaList"></div>
+      </section>
+
+      <section id="files" class="card">
+        <div class="section-head"><h2>Work Samples & Files</h2><span class="muted">PDF links</span></div>
+        <div class="grid-3" id="fileGallery"></div>
+      </section>
+
+      <section id="contact" class="card">
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:omar@osandoval.com">omar@osandoval.com</a></p>
+        <p>Email: <a id="mailto" href="#">sandoval.om@gmail.com</a></p>
+        <p>Location: Chicago area. Open to remote and hybrid.</p>
       </section>
 
+      <div class="footer">
+        © 2025 Omar Sandoval • Built by Omar with GitHub Pages + vanilla JS (ChatGPT-assisted)
+        · <a href="https://github.com/osandoval22/osandoval22.github.io" target="_blank" rel="noopener">Source</a>
+      </div>
     </main>
   </div>
+
+  <script>
+    /* Updated stamp */
+    (function(){
+      var u=document.getElementById('updated'); if(u){ u.textContent=new Date().toLocaleDateString(); }
+    })();
+
+    /* Email */
+    (function(){
+      var addr='sandoval.om@gmail.com';
+      var ml=document.getElementById('mailto'); if(ml){ ml.textContent=addr; ml.href='mailto:'+addr; }
+    })();
+
+    /* Projects */
+    var PROJECTS=[
+      {name:'Connect66 Platform',summary:'AI-assisted content and CRM workflow with clean analytics.',tools:['AI','GA4','HubSpot','Cloud'],links:[{label:'Demo',href:'https://connect66.net/'}]},
+      {name:'Engineering Delivery System',summary:'Simple rules, CI/CD, and KPIs that cut cycle time.',tools:['CI/CD','SRE','KPI'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'}]},
+      {name:'Multi-Site Infrastructure',summary:'Standardized networks and access control across 18 facilities.',tools:['Networking','Security','Ops'],links:[{label:'PDF',href:'files/Omar%20Sandoval%20Work%20Multi%20Site%20Support.pdf'}]}
+    ];
+
+    /* Files */
+    var FILES=[
+      {title:'Engineering Team Leadership and Delivery',kind:'PDF',tools:['Leadership','Delivery'],href:'files/Omar%20Sandoval%20Work%20Sample%20Engineering.pdf'},
+      {title:'Multi-Site Infrastructure Case Study',kind:'PDF',tools:['Networking','Security'],href:'files/Omar%20Sandoval%20Work%20Multi%20Site%20Support.pdf'}
+    ];
+
+    /* Awards */
+    var AWARDS = [
+      {
+        title: 'Digital Magazine of the Year (2024)',
+        org: 'GovTech (e.Republic)',
+        tag: 'Digital',
+        href: 'https://www.linkedin.com/posts/omar-sandoval_digital-magazine-of-the-year-govtechs-team-activity-7199830633513181184-pX_u/',
+        desc: 'Led requirements → delivery; moved print ($75k) to digital ($6k) — ~92% cost reduction.'
+      },
+      { title: 'OnCon Icon Top 50 Technology Professional (2025)', org: 'OnConferences', tag: 'Top 50', href: 'https://www.onconferences.com/25-tech-winners' },
+      { title: 'GovTech Top 25 Doers, Dreamers & Drivers (2020)', org: 'Government Technology', tag: 'Top 25', href: 'https://www.govtech.com/top-25/Omar-Sandoval.html' },
+      { title: 'Special Districts Technology Innovation Awards (2019)', org: 'Special Districts Program', tag: 'Innovation x2', href: 'https://www.positivelynaperville.com/2019/09/23/park-districts-omar-sandoval-receives-two-innovation-awards/105516' }
+    ];
+
+    /* Speaking */
+    var SPEAKING = [
+      { title: "Chicago Regional Digital Government Summit", role: "Moderator", year: "2025", note: "Regional leadership panel", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit" },
+      { title: "Illinois Public Sector Cybersecurity Summit", role: "Speaker/Moderator", year: "2025", note: "Event listing (bio section)", href: "https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit.html" },
+      { title: "Chicago Regional Digital Government Summit", role: "Speaker", year: "2024", note: "AI in the public sector — use cases & governance", href: "https://events.govtech.com/Chicago-Regional-Digital-Government-Summit-2024" },
+      { title: "Illinois Public Sector Cybersecurity Summit", role: "Moderator", year: "2024", note: "AI/ML for cyber defense panel", href: "https://events.govtech.com/Illinois-Public-Sector-Cybersecurity-Summit-2024" },
+      { title: "Illinois IT Leadership Forum", role: "Speaker", year: "2024", note: "Program listing", href: "https://events.govtech.com/Illinois-IT-Leadership-Forum-2024" },
+      { title: "Chicago Digital Government Summit", role: "Featured Speaker", year: "2023", note: "Digital Transformation for Government: The Future is Now", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2023" },
+      { title: "Illinois Public Sector Cybersecurity Summit", role: "Speaker", year: "2023", note: "Program listing", href: "#" },
+      { title: "Illinois Digital Government Summit", role: "Moderator", year: "2023", note: "Session moderation", href: "#" },
+      { title: "Illinois Digital Government Summit", role: "Moderator", year: "2022", note: "Security posture session", href: "https://events.govtech.com/Illinois-Digital-Government-Summit-2022" },
+      { title: "Chicago Digital Government Summit", role: "Speaker", year: "2022", note: "Program speaker (bio listed)", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2022" },
+      { title: "GFOA – General Session", role: "Featured Speaker", year: "2022", note: "General session bio", href: "https://www.gfoa.org/bio/sandoval" },
+      { title: "IPRA Soaring to New Heights Conference", role: "Speaker", year: "2017", note: "Park District Mobile App (Finance/IT track)", href: "https://cdn.ymaws.com/www.ilparks.org/resource/resmgr/2017_conference/2017_Final_Conf_Brochure.pdf" }
+    ];
+
+    /* Media (video/audio/articles/webinars/case studies) */
+    var MEDIA = [
+      { title: "Ruckus Networks Case Study — Naperville Park District", kind: "Case Study", note: "Featured technologist: district-wide Wi-Fi modernization across parks & facilities", href: "https://www.ruckusnetworks.com/resources/case-studies/naperville-park-district/" },
+      { title: "Free Wi-Fi at Several Park District Locations", kind: "Video (NCTV/NPCTV Archive)", note: "Local news segment on district Wi-Fi rollout", href: "https://archive.org/details/npctv-Free_Wi-Fi_Now_at_Several_Park_District_Locations" },
+      { title: "DYOPATH Connections Podcast: Adapting In Times of Change", kind: "Podcast (YouTube)", note: "Guest interview (formerly Single Path) — adapting IT through change", href: "https://www.youtube.com/watch?v=rUxc89b1pUY" },
+      { title: "DYOPATH Podcast – Episode Listing", kind: "Podcast page", note: "Show page listing the episode", href: "https://dyopath.com/resources/podcast/" },
+      { title: "Illinois IT Leadership Forum (2024)", kind: "Program / session page", note: "Leadership tools & staying relevant in IT", href: "https://events.govtech.com/Illinois-IT-Leadership-Forum-2024" },
+      { title: "Chicago Digital Government Summit (2023)", kind: "Session page", note: "Digital Transformation for Government: The Future is Now", href: "https://events.govtech.com/Chicago-Digital-Government-Summit-2023" },
+      { title: "Are We Witnessing the Death of the Password?", kind: "Article (GovTech)", note: "Round-up featuring Omar’s perspective", href: "https://www.govtech.com/security/are-we-witnessing-the-death-of-the-password" },
+      { title: "Moving Your District Forward", kind: "GovTech webinar page", note: "People, process & tech for the future", href: "https://webinars.govtech.com/Moving-Your-District-Forward%3A-Preparing-your-people%2C-processes-and-technologies-for-the-future-140322.html" },
+      { title: "Naperville Park District App — Local Coverage", kind: "Local news (Patch)", note: "App launch quote and feature", href: "https://patch.com/illinois/naperville/naperville-park-district-shares-news-notes" }
+    ];
+
+    /* Helpers */
+    function uniqTags(arr){
+      var set={}, out=['All'];
+      for(var i=0;i<arr.length;i++){
+        var tools=arr[i].tools||[];
+        for(var j=0;j<tools.length;j++){ var t=tools[j]; if(!set[t]){ set[t]=1; out.push(t);} }
+      }
+      return out;
+    }
+    function projCard(p){
+      var tags=(p.tools||[]).map(function(t){return "<span class='pill'>"+t+"</span>";}).join(" ");
+      var links=(p.links||[]).map(function(l){return "<a class='button' href='"+l.href+"' target='_blank' rel='noopener'>"+l.label+"</a>";}).join(" ");
+      return "<div class='tile'><h3>"+p.name+"</h3><p>"+p.summary+"</p><div class='row'>"+tags+"</div><div class='row'>"+links+"</div></div>";
+    }
+
+    /* Projects render + tags + search */
+    (function(){
+      var list=document.getElementById('projectList');
+      var tagbar=document.getElementById('tagbar');
+      var search=document.getElementById('q');
+      var state={tag:'All',q:''};
+
+      function renderProjects(){
+        if(!list) return;
+        var term=state.q.toLowerCase(), html='';
+        for(var i=0;i<PROJECTS.length;i++){
+          var p=PROJECTS[i];
+          var tagOk=(state.tag==='All')||((p.tools||[]).indexOf(state.tag)>=0);
+          var text=(p.name+' '+p.summary+' '+(p.tools||[]).join(' ')).toLowerCase();
+          var qOk=!term||text.indexOf(term)>=0;
+          if(tagOk&&qOk){ html+=projCard(p); }
+        }
+        list.innerHTML=html;
+      }
+      function renderTags(){
+        if(!tagbar) return;
+        var tags=uniqTags(PROJECTS), html='';
+        for(var i=0;i<tags.length;i++){
+          var t=tags[i], active=(t===state.tag)?' active':'';
+          html+="<button class='tab"+active+"' data-t='"+t+"'>"+t+"</button>";
+        }
+        tagbar.innerHTML=html;
+        var btns=tagbar.querySelectorAll('button.tab');
+        for(var j=0;j<btns.length;j++){
+          btns[j].addEventListener('click',function(e){
+            var t=e.currentTarget.getAttribute('data-t');
+            state.tag=t; renderTags(); renderProjects();
+          });
+        }
+      }
+      if(search){ search.addEventListener('input',function(e){ state.q=e.target.value||''; renderProjects(); }); }
+      renderTags(); renderProjects();
+    })();
+
+    /* Files render */
+    (function(){
+      var gal=document.getElementById('fileGallery'); if(!gal) return;
+      var html='';
+      for(var i=0;i<FILES.length;i++){
+        var f=FILES[i];
+        html+="<div class='tile'><h3>"+f.title+" <span class='badge'>"+f.kind+"</span></h3><div class='muted'>"+(f.tools||[]).join(', ')+"</div><div class='row'><a class='button' href='"+f.href+"' target='_blank' rel='noopener' data-track='file:"+f.title+"'>Open</a></div></div>";
+      }
+      gal.innerHTML=html;
+    })();
+
+    /* Awards render */
+    (function(){
+      var gal=document.getElementById('awardsGallery'); if(!gal) return;
+      var html='';
+      for(var i=0;i<AWARDS.length;i++){
+        var a=AWARDS[i];
+        html +=
+          "<div class='tile'>" +
+            "<h3>" + a.title + " <span class='badge'>" + a.tag + "</span></h3>" +
+            "<div class='muted'>" + a.org + "</div>" +
+            (a.desc ? "<div class='muted'>" + a.desc + "</div>" : "") +
+            "<div class='row'><a class='button' href='" + a.href + "' target='_blank' rel='noopener'>View</a></div>" +
+          "</div>";
+      }
+      gal.innerHTML=html;
+    })();
+
+    /* Speaking render */
+    (function(){
+      var list=document.getElementById('speakingList'); if(!list) return;
+      var html='';
+      for(var i=0;i<SPEAKING.length;i++){
+        var s=SPEAKING[i];
+        html+="<div class='tile'><h3>"+s.title+" <span class='badge'>"+s.role+"</span></h3><div class='muted'>"+s.year+" • "+s.note+"</div><div class='row'><a class='button' href='"+s.href+"' target='_blank' rel='noopener'>View</a></div></div>";
+      }
+      list.innerHTML=html;
+    })();
+
+    /* Media render */
+    (function(){
+      var list = document.getElementById('mediaList'); if(!list) return;
+      var html = '';
+      for (var i=0; i<MEDIA.length; i++){
+        var m = MEDIA[i];
+        html += "<div class='tile'>"
+          + "<h3>" + m.title + " <span class='badge'>" + m.kind + "</span></h3>"
+          + "<div class='muted'>" + (m.note || "") + "</div>"
+          + "<div class='row'><a class='button' href='" + m.href + "' target='_blank' rel='noopener'>View</a></div>"
+          + "</div>";
+      }
+      list.innerHTML = html;
+    })();
+
+    /* Simple click analytics hook (optional) */
+    (function(){
+      document.body.addEventListener('click',function(e){
+        var a=e.target.closest?e.target.closest('a[data-track]'):null;
+        if(!a) return;
+        var label=a.getAttribute('data-track');
+        try{ if(window.gtag){ window.gtag('event','click',{event_category:'file',event_label:label}); } }catch(e){}
+        try{ if(window.plausible){ window.plausible('File Open',{props:{label:label}}); } }catch(e){}
+      });
+    })();
+  </script>
 </body>
 </html>
-"""
-with open("/mnt/data/index.html","w",encoding="utf-8") as f:
-    f.write(html)
-print("Saved /mnt/data/index.html")
